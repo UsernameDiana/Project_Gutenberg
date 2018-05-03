@@ -1,7 +1,7 @@
 # Project_Gutenberg
 Test strategies of an application, that allows to figure out which cities are mentioned in which English books from Project Gutenberg.
 ## Text To Csv Converter
-To run convert all the txt files inside the "[booksfortesting](https://github.com/UsernameDiana/Project_Gutenberg/tree/master/booksfortesting)":
+To convert all the txt files inside the "[booksfortesting](https://github.com/UsernameDiana/Project_Gutenberg/tree/master/booksfortesting)":
  - Change the location of the "booksfortesting" path in [App.java](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/src/main/java/TestingExamForPlebs/TxtToCsv/App.java) for Reading.
  - Setting a new location to where to store the newly created ".csv" files in [App.java](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/src/main/java/TestingExamForPlebs/TxtToCsv/App.java).
  - You need to run the [App.java](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/src/main/java/TestingExamForPlebs/TxtToCsv/App.java) for Reading and Writing.
