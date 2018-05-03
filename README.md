@@ -15,7 +15,7 @@ To convert all the txt files inside the "[booksfortesting](https://github.com/Us
  ```
  bookid, title,
  0, title1, 
- 0, title2,
- 0, title3,
- 0, title4,
+ 1, title2,
+ 2, title3,
+ 3, title4,
 ```
