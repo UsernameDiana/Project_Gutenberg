@@ -1,10 +1,12 @@
 package entity;
 
+import Interfaces.ICity;
+
 /**
  *
  * @author diana
  */
-public class City {
+public class City implements ICity{
 
     private String name;
     private double lon;

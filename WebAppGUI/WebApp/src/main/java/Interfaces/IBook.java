@@ -5,10 +5,22 @@
  */
 package Interfaces;
 
+import entity.City;
+import java.util.List;
+
 /**
  *
  * @author diana
  */
 public interface IBook {
-    
+
+    List<City> getCities();
+
+    String getTitle();
+
+    void setTitle(String title);
+
+    String getAuthor();
+
+    void setAuthor(String author);
 }

@@ -1,14 +1,14 @@
 package entity;
 
+import Interfaces.IBook;
 import java.util.List;
 
 /**
  *
  * @author diana
  */
-public class Book {
+public class Book implements IBook{
 
-    String id;
     String title;
     String author;
     List<City> cities;
