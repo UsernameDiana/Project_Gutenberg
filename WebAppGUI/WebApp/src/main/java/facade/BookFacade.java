@@ -5,10 +5,12 @@
  */
 package facade;
 
+import Interfaces.IBookFacade;
+
 /**
  *
  * @author diana
  */
-public class BookFacade {
+public class BookFacade implements IBookFacade{
     
 }

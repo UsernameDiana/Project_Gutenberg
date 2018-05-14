@@ -5,10 +5,12 @@
  */
 package facade;
 
+import Interfaces.ICityFacade;
+
 /**
  *
  * @author diana
  */
-public class CityFacade {
+public class CityFacade implements ICityFacade{
     
 }
