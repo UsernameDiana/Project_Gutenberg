@@ -5,10 +5,14 @@
  */
 package Interfaces;
 
+import java.util.List;
+
 /**
  *
  * @author diana
  */
 public interface ICityFacade {
+    
+    List<ICity> getCitiesByBookTitle (String bookTitle);
     
 }

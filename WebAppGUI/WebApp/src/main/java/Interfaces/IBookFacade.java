@@ -5,10 +5,15 @@
  */
 package Interfaces;
 
+import java.util.List;
+
 /**
  *
  * @author diana
  */
 public interface IBookFacade {
+    
+    List<IBook> getBooksByCityName (String city);
+    List<IBook> getBooksByAuthorName (String author);
     
 }
