@@ -28,7 +28,7 @@ public class App {
 		// The name of the file to open.
 		int bookID = 0;
 		List<File> filesInFolder = Files
-				.walk(Paths.get("C:\\Users\\przyg\\Downloads\\soft\\soft\\book_download\\Downloads"))
+				.walk(Paths.get("/Users/diana/Desktop/git/Project_Gutenberg/TxtToCSV/booksfortesting"))
 				.filter(p -> p.getFileName().toString().endsWith(".txt")).map(Path::toFile)
 				.collect(Collectors.toList());
 
