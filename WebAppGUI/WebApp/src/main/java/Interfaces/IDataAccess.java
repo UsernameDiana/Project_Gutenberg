@@ -5,10 +5,19 @@
  */
 package Interfaces;
 
+import java.util.List;
+
 /**
  *
  * @author diana
  */
 public interface IDataAccess {
-    
+
+    public List<IBook> getBooksByCityName(String cityName); //User Story # 1
+
+    public List<ICity> getCitiesByBookTitle(String bookTitle); //User Story # 2
+
+    public List<IBook> getBooksByAuthorName(String authorName); //User Story # 3
+
+    public String getName();
 }

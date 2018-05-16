@@ -5,10 +5,35 @@
  */
 package databaseAccess;
 
+import Interfaces.IBook;
+import Interfaces.ICity;
+import Interfaces.IDataAccess;
+import java.util.List;
+
 /**
  *
  * @author diana
  */
-public class MongoDBAccess {
+public class MongoDBAccess implements IDataAccess{
+
+    @Override
+    public List<IBook> getBooksByCityName(String cityName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<ICity> getCitiesByBookTitle(String bookTitle) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<IBook> getBooksByAuthorName(String authorName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getName() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
