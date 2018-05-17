@@ -12,7 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="mybean" scope="session" class="facade.FrontEnd" />
         <jsp:setProperty name="mybean" property="city" />
         <h1>Hello, <jsp:getProperty name="mybean" property="city" />!</h1>
         

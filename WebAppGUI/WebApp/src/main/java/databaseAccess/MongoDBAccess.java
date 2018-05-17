@@ -8,13 +8,17 @@ package databaseAccess;
 import Interfaces.IBook;
 import Interfaces.ICity;
 import Interfaces.IDataAccess;
+import com.mongodb.MongoClient;
 import java.util.List;
 
 /**
  *
  * @author diana
  */
-public class MongoDBAccess implements IDataAccess{
+public class MongoDBAccess implements IDataAccess {
+
+    private MongoDBConnector connector = null;
+    private static MongoClient con = null;
 
     @Override
     public List<IBook> getBooksByCityName(String cityName) {
@@ -35,5 +39,5 @@ public class MongoDBAccess implements IDataAccess{
     public String getName() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
