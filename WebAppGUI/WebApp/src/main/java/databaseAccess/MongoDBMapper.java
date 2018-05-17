@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author diana
  */
-public class MongoDBAccess implements IDataAccess {
+public class MongoDBMapper implements IDataAccess {
 
     private MongoDBConnector connector = null;
     private static MongoClient con = null;
