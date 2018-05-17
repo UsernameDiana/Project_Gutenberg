@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="" %>
+<!--import the class with the info-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,8 +14,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:setProperty name="mybean" property="city" />
-        <h1>Hello, <jsp:getProperty name="mybean" property="city" />!</h1>
-        
+        <jsp:useBean id="mybean" scope="session" class="" />
+        <jsp:setProperty property="*" name="mybean" />
+        <jsp:getProperty property="city" name="mybean" />
     </body>
 </html>
