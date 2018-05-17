@@ -16,6 +16,9 @@ public class City implements ICity{
 
     }
 
+    public City(String name) {
+    	this.name = name;
+    }
     public City(String name, double lat, double lon) {
         this.name = name;
         this.lon = lon;
