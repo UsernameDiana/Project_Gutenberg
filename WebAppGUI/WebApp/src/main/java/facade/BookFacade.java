@@ -24,18 +24,16 @@ public class BookFacade implements IBookFacade {
     Book book;
     private DBConnector sql;
     DBMapperSQL mapper = new DBMapperSQL(sql);
-    
-    
-    
+
     public BookFacade(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
-    private EntityManager getEntityManager(){
+
+    private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
-    public void addEntityManagerFactory(EntityManagerFactory emf){
+
+    public void addEntityManagerFactory(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
@@ -46,18 +44,17 @@ public class BookFacade implements IBookFacade {
     @Override
     public List<Book> getBooksByCityName(String city) {
         EntityManager em = getEntityManager();
-        try{
+        try {
             mapper.getBooksByCityName(city);
-        }
-        finally{
+        } finally {
             em.close();
         }
-        return null;   
+        return null;
     }
 
     @Override
     public List<Book> getBooksByAuthorName(String author) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

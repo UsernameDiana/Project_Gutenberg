@@ -11,12 +11,12 @@ import entity.Book;
 
 public class Main {
 
-	public static void main(String[] args) throws Exception {
-		DBMapperSQL sqlCon = new DBMapperSQL(new DBConnector());
-                //maybe
-                //MongoDBMapper mongoCon = new MongoDBMapper(new MongoDBConnector());
-                
-                //maybe part2
+    public static void main(String[] args) throws Exception {
+        DBMapperSQL sqlCon = new DBMapperSQL(new DBConnector());
+        //maybe
+        //MongoDBMapper mongoCon = new MongoDBMapper(new MongoDBConnector());
+
+        //maybe part2
 //                try {
 //                    MongoClient mongoClient = new MongoClient( "46.101.57.37" , 27017 );
 //                    MongoDatabase db  = mongoClient.getDatabase( "gutenberg" );
@@ -24,23 +24,22 @@ public class Main {
 //                }catch(Exception e){
 //            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 //                } 
-                
-		List<Book> bblist = new ArrayList();
-		List<Book> blist = new ArrayList();
-		
-		blist = sqlCon.getBooksByAuthorName("John Lord");
-		bblist = sqlCon.getBooksByCityName("Paris");
-		
-                System.out.println("------------ 1st Query");
-		for (IBook iBook : blist) {
-			System.out.println(iBook.getTitle());
-		}
-		
-		System.out.println("------------ 2nd Query");
-		
-		for (IBook iBook : bblist) {
-			System.out.println(iBook.getTitle());
-		}
-	}
+        List<Book> bblist = new ArrayList();
+        List<Book> blist = new ArrayList();
+
+        blist = sqlCon.getBooksByAuthorName("John Lord");
+        bblist = sqlCon.getBooksByCityName("Paris");
+
+        System.out.println("------------ 1st Query");
+        for (IBook iBook : blist) {
+            System.out.println(iBook.getTitle());
+        }
+
+        System.out.println("------------ 2nd Query");
+
+        for (IBook iBook : bblist) {
+            System.out.println(iBook.getTitle());
+        }
+    }
 
 }
