@@ -4,7 +4,7 @@ import entity.*;
 import java.sql.Connection;
 
 /**
- *
+ *q
  * @author Nexao
  */
 public class DBFacade {
