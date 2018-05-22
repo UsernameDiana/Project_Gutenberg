@@ -6,11 +6,12 @@ import java.sql.DriverManager;
 public class DBConnector {
 
     private Connection connection = null;
-
+    private static DBConnector instance;
     //Constants
     private static final String URL = "jdbc:mysql://46.101.57.37:3306/project?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String USERNAME = "remote";
     private static final String PASSWORD = "test";
+   
 
     public DBConnector() throws Exception {
 
@@ -22,9 +23,18 @@ public class DBConnector {
             System.out.println("Failed to connect: " + e);
         }
     }
+    
+    public static DBConnector getInstance() throws Exception
+    {
+        if (instance == null)
+            instance = new DBConnector();
+        return instance;
+    }
 
     public Connection getConnection() {
         return this.connection;
     }
+    
+    
 
 }
