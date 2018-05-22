@@ -32,20 +32,18 @@ public class BookFacadeREST {
 
     @PersistenceContext(unitName = "sqlDatabase")
     private EntityManager em;
-    static IBookFacade facade = new BookFacade(Persistence.createEntityManagerFactory(""));
+    static IBookFacade facade = (IBookFacade) new BookFacade(Persistence.createEntityManagerFactory(""));
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public BookFacadeREST() {
-        
+
     }
-    
+
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Book find(@PathParam("id") Long id) {
-        
-        
-        
+        return null;
     }
 
     @GET
@@ -54,9 +52,8 @@ public class BookFacadeREST {
         return null;
     }
 
-
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }
