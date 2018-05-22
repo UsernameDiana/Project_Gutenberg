@@ -52,8 +52,7 @@ public class BookFacade implements IBookFacade {
         finally{
             em.close();
         }
-             
-            
+        return null;   
     }
 
     @Override

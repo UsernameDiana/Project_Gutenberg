@@ -7,6 +7,7 @@ import Interfaces.IBook;
 import Interfaces.ICity;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
+import entity.Book;
 
 public class Main {
 
@@ -24,8 +25,8 @@ public class Main {
 //            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 //                } 
                 
-		List<IBook> bblist = new ArrayList();
-		List<IBook> blist = new ArrayList();
+		List<Book> bblist = new ArrayList();
+		List<Book> blist = new ArrayList();
 		
 		blist = sqlCon.getBooksByAuthorName("John Lord");
 		bblist = sqlCon.getBooksByCityName("Paris");

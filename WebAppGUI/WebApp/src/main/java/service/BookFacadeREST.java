@@ -35,9 +35,9 @@ public class BookFacadeREST {
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public BookFacadeREST() {
-        
+
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson(@PathParam("city") String city) {
@@ -61,9 +61,8 @@ public class BookFacadeREST {
         return null;
     }
 
-
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

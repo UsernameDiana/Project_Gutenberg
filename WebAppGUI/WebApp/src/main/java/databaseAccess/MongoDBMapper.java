@@ -9,6 +9,8 @@ import Interfaces.IBook;
 import Interfaces.ICity;
 import Interfaces.IDataAccess;
 import com.mongodb.MongoClient;
+import entity.Book;
+import entity.City;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,36 +20,19 @@ import java.util.List;
  */
 public class MongoDBMapper implements IDataAccess {
 
-    private MongoDBConnector connector = null;
-    private static MongoClient con = null;
-
-    public MongoDBMapper() {
-        this.connector = new MongoDBConnector();
-        this.con = connector.getConnection();
+    @Override
+    public List<Book> getBooksByCityName(String cityName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<IBook> getBooksByCityName(String cityName) {
-        List<IBook> list = new ArrayList();
-        // TODO
-        
-       return list;
+    public List<City> getCitiesByBookTitle(String bookTitle) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<ICity> getCitiesByBookTitle(String bookTitle) {
-        List<ICity> list = new ArrayList();
-        // TODO
-        
-        return list;
-    }
-
-    @Override
-    public List<IBook> getBooksByAuthorName(String authorName) {
-	List<IBook> list = new ArrayList();
-        // TODO
-        
-        return list;
+    public List<Book> getBooksByAuthorName(String authorName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
