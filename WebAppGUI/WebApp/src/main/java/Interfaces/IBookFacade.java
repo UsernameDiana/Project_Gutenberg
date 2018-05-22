@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author diana
  */
-public interface IBookFacade {
+public interface IBookFacade{
     
     List<Book> getBooksByCityName (String city);
     List<Book> getBooksByAuthorName (String author);

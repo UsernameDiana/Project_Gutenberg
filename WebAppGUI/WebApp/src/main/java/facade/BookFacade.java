@@ -8,6 +8,7 @@ package facade;
 import Interfaces.IBook;
 import Interfaces.IBookFacade;
 import databaseAccess.DBConnector;
+import databaseAccess.DBFacade;
 import databaseAccess.DBMapperSQL;
 import entity.Book;
 import java.util.List;
@@ -22,10 +23,10 @@ public class BookFacade implements IBookFacade {
 
     EntityManagerFactory emf;
     Book book;
-    private DBConnector sql;
-    DBMapperSQL mapper = new DBMapperSQL(sql);
+    DBFacade dbfacade;
 
     public BookFacade(EntityManagerFactory emf) {
+        dbfacade = DBFacade.getInstance();
         this.emf = emf;
     }
 
@@ -43,13 +44,7 @@ public class BookFacade implements IBookFacade {
 
     @Override
     public List<Book> getBooksByCityName(String city) {
-        EntityManager em = getEntityManager();
-        try {
-            mapper.getBooksByCityName(city);
-        } finally {
-            em.close();
-        }
-        return null;
+        return dbfacade.getBooksByCityName(city);
     }
 
     @Override

@@ -2,6 +2,7 @@ package databaseAccess;
 
 import entity.*;
 import java.sql.Connection;
+import java.util.List;
 
 /**
  *q
@@ -16,7 +17,7 @@ public class DBFacade {
     private final Connection con;
     private static DBFacade instance;
 
-    public DBFacade() throws Exception {
+    public DBFacade(){
         con = dbcsql.getInstance().getConnection();
         dbsql = new DBMapperSQL(dbcsql);
         dbmongo = new MongoDBMapper();
@@ -28,11 +29,15 @@ public class DBFacade {
         dbmongo = new MongoDBMapper();
     }
 
-    public static DBFacade getInstance() throws Exception {
+    public static DBFacade getInstance(){
         if (instance == null) {
             instance = new DBFacade();
         }
         return instance;
+    }
+    
+    public List<Book> getBooksByCityName(String cityName){
+        return dbsql.getBooksByCityName(cityName);
     }
 
 }

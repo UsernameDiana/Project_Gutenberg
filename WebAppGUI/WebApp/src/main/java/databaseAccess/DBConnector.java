@@ -13,7 +13,7 @@ public class DBConnector {
     private static final String PASSWORD = "test";
    
 
-    public DBConnector() throws Exception {
+    public DBConnector() {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -24,7 +24,7 @@ public class DBConnector {
         }
     }
     
-    public static DBConnector getInstance() throws Exception
+    public static DBConnector getInstance()
     {
         if (instance == null)
             instance = new DBConnector();
