@@ -5,6 +5,10 @@
  */
 package facade;
 
+import Interfaces.IBook;
+import Interfaces.IBookFacade;
+import databaseAccess.DBConnector;
+import databaseAccess.DBMapperSQL;
 import entity.Book;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -14,10 +18,13 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author Nexao
  */
-public class BookFacade {
+public class BookFacade implements IBookFacade {
 
     EntityManagerFactory emf;
     Book book;
+    private DBConnector sql;
+    DBMapperSQL mapper = new DBMapperSQL(sql);
+    
     
     
     public BookFacade(EntityManagerFactory emf) {
@@ -33,6 +40,24 @@ public class BookFacade {
     }
 
     public List<Book> getBooksByCity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Book> getBooksByCityName(String city) {
+        EntityManager em = getEntityManager();
+        try{
+            mapper.getBooksByCityName(city);
+        }
+        finally{
+            em.close();
+        }
+             
+            
+    }
+
+    @Override
+    public List<Book> getBooksByAuthorName(String author) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

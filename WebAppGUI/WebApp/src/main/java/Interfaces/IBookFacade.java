@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import entity.Book;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public interface IBookFacade {
     
-    List<IBook> getBooksByCityName (String city);
-    List<IBook> getBooksByAuthorName (String author);
+    List<Book> getBooksByCityName (String city);
+    List<Book> getBooksByAuthorName (String author);
     
 }

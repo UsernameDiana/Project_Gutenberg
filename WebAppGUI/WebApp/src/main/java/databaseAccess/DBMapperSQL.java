@@ -7,8 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Interfaces.IBook;
-import Interfaces.ICity;
 import Interfaces.IDataAccess;
 import entity.Book;
 import entity.City;
@@ -22,8 +20,8 @@ public class DBMapperSQL implements IDataAccess{
 	}
 
 	@Override
-	public List<IBook> getBooksByCityName(String cityName) {
-		List<IBook> list = new ArrayList();
+	public List<Book> getBooksByCityName(String cityName) {
+		List<Book> list = new ArrayList();
 
 		try {
 			Connection connection = this.sqlCon.getConnection();
@@ -42,9 +40,9 @@ public class DBMapperSQL implements IDataAccess{
 	}
 
 	@Override
-	public List<ICity> getCitiesByBookTitle(String bookTitle) {
+	public List<City> getCitiesByBookTitle(String bookTitle) {
 		
-		List<ICity> list = new ArrayList();
+		List<City> list = new ArrayList();
 
 		try {
 			Connection connection = this.sqlCon.getConnection();
@@ -62,9 +60,9 @@ public class DBMapperSQL implements IDataAccess{
 	}
 
 	@Override
-	public List<IBook> getBooksByAuthorName(String authorName) {
+	public List<Book> getBooksByAuthorName(String authorName) {
 		
-		List<IBook> list = new ArrayList();
+		List<Book> list = new ArrayList();
 		
 		try {
 			Connection connection = this.sqlCon.getConnection();

@@ -6,7 +6,6 @@
 package service;
 
 import Interfaces.IBookFacade;
-import Interfaces.IDataAccess;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.Book;
@@ -32,7 +31,7 @@ public class BookFacadeREST {
 
     @PersistenceContext(unitName = "sqlDatabase")
     private EntityManager em;
-    static IBookFacade facade = new BookFacade(Persistence.createEntityManagerFactory(""));
+    static IBookFacade facade = new BookFacade(Persistence.createEntityManagerFactory("sqlDatabase"));
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public BookFacadeREST() {
@@ -40,13 +39,21 @@ public class BookFacadeREST {
     }
     
     @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Book find(@PathParam("id") Long id) {
-        
-        
-        
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getJson(@PathParam("city") String city) {
+        List<Book> books = facade.getBooksByCityName(city);
+        return gson.toJson(books);
     }
+    
+//    @GET
+//    @Path("{id}")
+//    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+//    public Book find(@PathParam("city") String city) {
+//        
+//        List<Book> books = facade.getBooksByCityName(city);
+//        return gson.toJson(books);
+//        
+//    }
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

@@ -5,6 +5,8 @@
  */
 package Interfaces;
 
+import entity.Book;
+import entity.City;
 import java.util.List;
 
 /**
@@ -13,11 +15,11 @@ import java.util.List;
  */
 public interface IDataAccess {
 
-    public List<IBook> getBooksByCityName(String cityName); //User Story # 1
+    public List<Book> getBooksByCityName(String cityName); //User Story # 1
 
-    public List<ICity> getCitiesByBookTitle(String bookTitle); //User Story # 2
+    public List<City> getCitiesByBookTitle(String bookTitle); //User Story # 2
 
-    public List<IBook> getBooksByAuthorName(String authorName); //User Story # 3
+    public List<Book> getBooksByAuthorName(String authorName); //User Story # 3
 
     public String getName();
 }
