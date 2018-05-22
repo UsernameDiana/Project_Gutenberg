@@ -36,7 +36,7 @@ public class MongoDBMapper implements IDataAccess {
         } catch (Exception e) {
         }
         
-
+          return null;
 
     }
 
