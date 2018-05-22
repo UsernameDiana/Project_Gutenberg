@@ -11,7 +11,7 @@ public class MongoDBConnector {
 
     private MongoClient mongoClient = null;
 
-    private String URI = "mongodb://place your mongodb access here";
+    private String URI = "mongodb://46.101.57.37:27017";
 
     public MongoClient getConnection() {
         try {
