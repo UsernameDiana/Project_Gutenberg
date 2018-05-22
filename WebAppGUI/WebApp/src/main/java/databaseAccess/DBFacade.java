@@ -20,13 +20,13 @@ public class DBFacade {
     public DBFacade(){
         con = dbcsql.getInstance().getConnection();
         dbsql = new DBMapperSQL(dbcsql);
-        dbmongo = new MongoDBMapper();
+        dbmongo = new MongoDBMapper(dbcmongo);
     }
 
     public DBFacade(Connection conn) {
         con = conn;
         dbsql = new DBMapperSQL(dbcsql);
-        dbmongo = new MongoDBMapper();
+        dbmongo = new MongoDBMapper(dbcmongo);
     }
 
     public static DBFacade getInstance(){

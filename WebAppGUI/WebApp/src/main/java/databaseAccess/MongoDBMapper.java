@@ -11,6 +11,7 @@ import Interfaces.IDataAccess;
 import com.mongodb.MongoClient;
 import entity.Book;
 import entity.City;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +21,23 @@ import java.util.List;
  */
 public class MongoDBMapper implements IDataAccess {
 
+    private MongoDBConnector mongoCon;
+
+    public MongoDBMapper(MongoDBConnector mongoCon) {
+        this.mongoCon = mongoCon;
+    }
+    
     @Override
     public List<Book> getBooksByCityName(String cityName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            List<Book> list = new ArrayList();
+            
+            try {
+                    mongoCon.getConnection();
+        } catch (Exception e) {
+        }
+        
+          return null;
+
     }
 
     @Override
