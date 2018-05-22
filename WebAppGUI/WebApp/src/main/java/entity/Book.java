@@ -43,6 +43,32 @@ public class Book implements IBook, Serializable {
         this.author = author;
         this.cities = cities;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
+    }
+    
+    
     
     public Long getId() {
         return id;
@@ -57,29 +83,5 @@ public class Book implements IBook, Serializable {
         return "entity.Book[ id=" + id + " ]";
     }
 
-    @Override
-    public List<City> getCities() {
-       return cities;
-    }
-
-    @Override
-    public String getTitle() {
-        return this.title;    
-        }
-
-    @Override
-    public void setTitle(String title) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getAuthor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setAuthor(String author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+   
 }

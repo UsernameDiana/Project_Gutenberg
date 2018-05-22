@@ -15,7 +15,7 @@
     </head>
     <body>
         <jsp:useBean id="mybean" scope="session" class="" />
-        <jsp:setProperty property="*" name="mybean" />
+        <jsp:setProperty property="city" name="mybean" />
         <jsp:getProperty property="city" name="mybean" />
     </body>
 </html>
