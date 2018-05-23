@@ -39,10 +39,12 @@ public class BookFacadeREST {
     }
 
     @GET
+    @Path("/BookCity/{a}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@PathParam("city") String city) {
-        List<Book> books = facade.getBooksByCityName(city);
+    public String getBooksByCityName(@PathParam("city") String city) {
+        List<Book> books = facade.getBooksByCityName(city);        
         return gson.toJson(books);
+        
     }
     
 //    @GET
