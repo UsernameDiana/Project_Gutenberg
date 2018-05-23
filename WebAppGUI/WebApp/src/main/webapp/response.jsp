@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="" %>
+<%@page import="service.BookFacadeREST" %>
 <!--import the class with the info-->
 <!DOCTYPE html>
 <html>
@@ -13,9 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    
     <body>
-        <jsp:useBean id="mybean" scope="session" class="" />
-        <jsp:setProperty property="city" name="mybean" />
-        <jsp:getProperty property="city" name="mybean" />
+        <form action="getBooksByCityName">
+            
+            
+        </form>
     </body>
 </html>
