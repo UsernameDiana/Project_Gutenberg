@@ -19,7 +19,7 @@ import org.junit.Test;
  *
  * @author diana
  */
-public class MongoUnitTests {
+public class MongoDBMapperUnittest {
 
     private MongoDBMapper MongoDBMapper;
 
