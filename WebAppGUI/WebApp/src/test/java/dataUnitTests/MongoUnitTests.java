@@ -29,7 +29,7 @@ public class MongoUnitTests {
     }
 
     @Test
-    @FileParameters("src/test/java/test/resources/S1-validinput-mongodb.csv")
+    @FileParameters("src/test/resources/UserStory1_mongodb.csv")
     public void getBooksByCityTest(String city, String title, String author) {
         List<Book> books;
         books = MongoDBMapper.getBooksByCityName(city);
