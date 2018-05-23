@@ -21,5 +21,4 @@ public interface IDataAccess {
 
     public List<Book> getBooksByAuthorName(String authorName); //User Story # 3
 
-    public String getName();
 }

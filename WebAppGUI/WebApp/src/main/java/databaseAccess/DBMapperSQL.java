@@ -79,12 +79,6 @@ public class DBMapperSQL implements IDataAccess{
 		return list;
 	}
 
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 //	public List<Nodes> getAll() {
 //		List<Nodes> list = new ArrayList();
