@@ -5,34 +5,40 @@
  */
 package dataUnitTests;
 
+import databaseAccess.MongoDBMapper;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author diana
  */
 public class MongoUnitTests {
-    
+
+    private MongoDBMapper MongoDBMapper;
+
+    @Before
+    public void setup() {
+        this.MongoDBMapper = new MongoDBMapper();
+    }
+
     public MongoUnitTests() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
