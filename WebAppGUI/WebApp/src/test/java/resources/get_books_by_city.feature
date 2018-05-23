@@ -1,12 +1,16 @@
 Feature: Get Books By City
-  Return list of books
+    As a User
+    I want [feature]
+    So that I get in return a list of books
 
-  Scenario Outline: Enter Valid City name
-    Given The city is '<city>'
-    When Entering '<city>' and choosing '<database>'
-    Then I should get '<page>'
+ Scenario Outline: Enter Valid City name
+    Given The city is a '<city>'
+    When Entering '<city>' and choosing a '<database>'
+    Then I should get a '<page>'
 
 Examples:
     | city     | page            | database |
     | Paris    | success         | mongodb  |
+    | Paris    | success         | sql      |
+    | Paris    | success         | neo4j    |
 
