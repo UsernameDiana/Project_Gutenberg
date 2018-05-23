@@ -6,10 +6,10 @@
 package dataUnitTests;
 
 import databaseAccess.DBConnector;
+import databaseAccess.DBMapperSQL;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
 /**
  *
@@ -17,8 +17,8 @@ import org.mockito.Mock;
  */
 public class DBMapperSQLUnittest {
 
-    @Mock
     private DBConnector sqlCon;
+    DBMapperSQL mapper = new DBMapperSQL(sqlCon);
 
     @Before
     public void setUp() throws Exception{
@@ -27,6 +27,9 @@ public class DBMapperSQLUnittest {
     
     @Test
     public void testGetBooksByCityName() throws Exception{
+        String cityName = "Paris";
+        mapper.getBooksByCityName(cityName);
+        
     }
     
     @Test
