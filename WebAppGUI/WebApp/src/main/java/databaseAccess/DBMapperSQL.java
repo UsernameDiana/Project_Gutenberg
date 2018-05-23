@@ -51,7 +51,7 @@ public class DBMapperSQL implements IDataAccess{
 			ResultSet res = stmt.executeQuery(query);
 			while (res.next()) {
 			String city = res.getString("city");
-			list.add(new City(city));
+			list.add(new City(city));                        
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
