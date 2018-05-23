@@ -6,10 +6,14 @@
 package dataUnitTests;
 
 import databaseAccess.MongoDBMapper;
-import org.junit.After;
-import org.junit.AfterClass;
+import static org.hamcrest.CoreMatchers.equalTo;
+import junitparams.FileParameters;
+import entity.Book;
+import java.util.List;
+import org.hamcrest.CoreMatchers;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  *
@@ -24,28 +28,12 @@ public class MongoUnitTests {
         this.MongoDBMapper = new MongoDBMapper();
     }
 
-    public MongoUnitTests() {
+    @Test
+    @FileParameters("src/test/java/test/resources/S1-validinput-mongodb.csv")
+    public void getBooksByCityTest(String city, String title, String author) {
+        List<Book> books;
+        books = MongoDBMapper.getBooksByCityName(city);
+        assertThat(books.get(0).getTitle(), CoreMatchers.is(equalTo(title)));
+        assertThat(books.get(0).getAuthor(), CoreMatchers.is(equalTo(author)));
     }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

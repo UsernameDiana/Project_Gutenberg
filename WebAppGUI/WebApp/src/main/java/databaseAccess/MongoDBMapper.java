@@ -13,10 +13,9 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.in;
 import entity.Book;
 import entity.City;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.text.Document;
+import org.bson.Document;
 
 /**
  *
@@ -42,30 +41,33 @@ public class MongoDBMapper implements IDataAccess {
     @Override
     public List<Book> getBooksByCityName(String cityName) {
 
+        List<Book> list = new ArrayList();
+
         try {
-            List<Book> list = new ArrayList();
             MongoDatabase database = con.getDatabase(dbname);
             MongoCollection coll = database.getCollection(col);
-            FindIterable<Document> findIterable = coll.find(in("cities.name", cityName));
+            FindIterable<Document> findIterable = coll.find(in("city.name", cityName));
+
             for (Document document : findIterable) {
-                System.out.println("");
+                System.out.println(document.toJson());
             }
 
         } catch (Exception e) {
+            System.out.println(e.toString());
         }
-        return null;
+        return list;
     }
 
     @Override
-    public List<City> getCitiesByBookTitle(String bookTitle
-    ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<City> getCitiesByBookTitle(String bookTitle) {
+        throw new UnsupportedOperationException("Not supported yet.");
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Book> getBooksByAuthorName(String authorName
-    ) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Book> getBooksByAuthorName(String authorName) {
+        throw new UnsupportedOperationException("Not supported yet.");
+        //To change body of generated methods, choose Tools | Templates.
     }
 
 }
