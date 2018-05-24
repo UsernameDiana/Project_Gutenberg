@@ -5,12 +5,12 @@ Feature: Get Books By City
 
  Scenario Outline: Enter Valid City name
     Given The city is a '<city>'
-    When Entering '<city>' and choosing a '<database>'
+    When Entering '<city>'
     Then I should get a '<page>'
 
 Examples:
     | city     | page            | database |
     | Paris    | success         | mongodb  |
     | Paris    | success         | sql      |
-    | Paris    | success         | neo4j    |
+    | Paris    | success         | postgres |
 
