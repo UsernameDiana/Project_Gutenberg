@@ -22,14 +22,17 @@ public class LocalConnection {
     public LocalConnection(){
         System.out.println("Inside the connection");
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
             System.out.println("Just did the DRIVER ");
-             connection = DriverManager.getConnection("jdbc:derby://localhost:1527/Testdata", null, null);
+            
+             connection = DriverManager.getConnection("jdbc:derby://localhost:1527/Testdata", "", "");
+             
             System.out.println("Connected to Testdata ");
                        
         } catch (Exception e) {
         }
-        System.out.println("Connected!");
+        System.out.println("Done");
     }
     
     public static LocalConnection getInstance()
