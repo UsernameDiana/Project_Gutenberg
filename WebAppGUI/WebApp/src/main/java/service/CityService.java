@@ -22,12 +22,12 @@ import javax.ws.rs.core.MediaType;
  */
 @Stateless
 @Path("entity.city")
-public class CityFacadeREST{
+public class CityService{
 
     @PersistenceContext(unitName = "sqlDatabase")
     private EntityManager em;
 
-    public CityFacadeREST() {
+    public CityService() {
         
     }
 

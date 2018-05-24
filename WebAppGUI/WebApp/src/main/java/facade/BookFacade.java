@@ -7,9 +7,9 @@ package facade;
 
 import Interfaces.IBook;
 import Interfaces.IBookFacade;
-import databaseAccess.DBConnector;
+import databaseAccess.SQLDBConnector;
 import databaseAccess.DBFacade;
-import databaseAccess.DBMapperSQL;
+import databaseAccess.SQLDBMapper;
 import entity.Book;
 import java.util.List;
 import javax.persistence.EntityManager;

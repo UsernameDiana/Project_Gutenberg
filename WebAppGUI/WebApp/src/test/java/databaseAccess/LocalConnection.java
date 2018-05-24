@@ -8,6 +8,7 @@ package databaseAccess;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -17,22 +18,22 @@ import java.sql.Statement;
 public class LocalConnection {
     
     private Connection connection = null;
-    private static LocalConnection instance;
+    static LocalConnection instance;
     
     public LocalConnection(){
-        System.out.println("Inside the connection");
+//        System.out.println("Inside the connection");
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            System.out.println("Just did the DRIVER ");
+//            System.out.println("Just did the DRIVER ");
             
-             connection = DriverManager.getConnection("jdbc:derby://localhost:1527/Testdata", "", "");
+             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb", "root", "root1");
              
             System.out.println("Connected to Testdata ");
                        
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
         }
-        System.out.println("Done");
+//        System.out.println("Done");
     }
     
     public static LocalConnection getInstance()

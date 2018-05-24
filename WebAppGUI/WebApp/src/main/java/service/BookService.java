@@ -27,14 +27,14 @@ import javax.ws.rs.core.MediaType;
  */
 @Stateless
 @Path("/book")
-public class BookFacadeREST {
+public class BookService {
 
     @PersistenceContext(unitName = "sqlDatabase")
     private EntityManager em;
     static IBookFacade facade = new BookFacade(Persistence.createEntityManagerFactory("sqlDatabase"));
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public BookFacadeREST() {
+    public BookService() {
 
     }
 
