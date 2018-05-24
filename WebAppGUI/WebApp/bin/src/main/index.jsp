@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="" %>
+<!--import the class with the info-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,9 +14,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="mybean" scope="session" class="facade.FrontEnd" />
-        <jsp:setProperty name="mybean" property="city" />
-        <h1>Hello, <jsp:getProperty name="mybean" property="city" />!</h1>
-        
+        <form action="BookRest" method="POST" name="BookRestful">
+            <input type="hidden" name="command" value="getBooksByCityName">
+            <input type="text" name="city" value="" />
+            <input type="submit" value="Submit" name="Submit" />
+        </form>
     </body>
 </html>

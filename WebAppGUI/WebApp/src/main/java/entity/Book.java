@@ -7,6 +7,7 @@ package entity;
 
 import Interfaces.IBook;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,23 +28,27 @@ public class Book implements IBook, Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     String title;
-    String author;
-    List<City> cities;
+    List<String> author = new ArrayList<>();
+    List<City> cities = new ArrayList<>();
 
     public Book() {
     }
 
     public Book(String title, String author) {
         this.title = title;
-        this.author = author;
+        this.author.add(author);
     }
 
-    public Book(String title, String author, List<City> cities) {
+    public Book(String title, String author, City city) {
         this.title = title;
-        this.author = author;
-        this.cities = cities;
+        this.author.add(author);
+        this.cities.add(city);
     }
-
+    public Book(Long bookid, String title, String author){
+        this.id = bookid;
+        this.title = title;
+        this.author.add(author);
+    }
     public String getTitle() {
         return title;
     }
@@ -52,23 +57,21 @@ public class Book implements IBook, Serializable {
         this.title = title;
     }
 
-    public String getAuthor() {
+    public List<String> getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void addAuthor(String author) {
+        this.author.add(author);
     }
 
     public List<City> getCities() {
         return cities;
     }
 
-    public void setCities(List<City> cities) {
-        this.cities = cities;
+    public void addCity(City city) {
+        this.cities.add(city);
     }
-    
-    
     
     public Long getId() {
         return id;

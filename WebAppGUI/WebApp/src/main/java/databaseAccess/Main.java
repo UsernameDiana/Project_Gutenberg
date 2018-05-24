@@ -8,11 +8,14 @@ import Interfaces.ICity;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import entity.Book;
+import facade.BookFacade;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        DBMapperSQL sqlCon = new DBMapperSQL(new DBConnector());
+        BookFacade bf = new BookFacade();
         //maybe
         //MongoDBMapper mongoCon = new MongoDBMapper(new MongoDBConnector());
 
@@ -24,11 +27,11 @@ public class Main {
 //                }catch(Exception e){
 //            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 //                } 
-        List<Book> bblist = new ArrayList();
-        List<Book> blist = new ArrayList();
+        Map<Long, IBook> bblist = new HashMap();
+        List<IBook> blist = new ArrayList();
 
-        blist = sqlCon.getBooksByAuthorName("John Lord");
-        bblist = sqlCon.getBooksByCityName("Paris");
+        blist = bf.getBooksByAuthorName("John Lord");
+        bblist = bf.getBooksByCityName("Paris");
 
         System.out.println("------------ 1st Query");
         for (IBook iBook : blist) {
@@ -37,9 +40,9 @@ public class Main {
 
         System.out.println("------------ 2nd Query");
 
-        for (IBook iBook : bblist) {
-            System.out.println(iBook.getTitle());
-        }
+//        for (IBook iBook : bblist) {
+//            System.out.println(iBook.getTitle());
+//        }
     }
 
 }

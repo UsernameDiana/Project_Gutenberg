@@ -15,12 +15,18 @@ import java.util.List;
 public interface IBook {
 
     List<City> getCities();
+    
+    void addCity(City city);
 
     String getTitle();
 
     void setTitle(String title);
 
-    String getAuthor();
+    List<String> getAuthor();
 
-    void setAuthor(String author);
+    void addAuthor(String author);
+    
+    Long getId();
+
+    void setId(Long id);
 }

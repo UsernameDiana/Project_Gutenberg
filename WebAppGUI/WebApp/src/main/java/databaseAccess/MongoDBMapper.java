@@ -12,6 +12,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.in;
 import entity.Book;
+import Interfaces.IBook;
 import entity.City;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import org.bson.Document;
  *
  * @author diana
  */
-public class MongoDBMapper implements IDataAccess {
+public class MongoDBMapper {
 
     private MongoDBConnector mongoCon;
     private static MongoClient con = null;
@@ -38,10 +39,10 @@ public class MongoDBMapper implements IDataAccess {
         this.con = mongoCon.getConnection();
     }
 
-    @Override
-    public List<Book> getBooksByCityName(String cityName) {
+    
+    public List<IBook> getBooksByCityName(String cityName) {
 
-        List<Book> list = new ArrayList();
+        List<IBook> list = new ArrayList();
 
         try {
             MongoDatabase database = con.getDatabase(dbname);
@@ -58,14 +59,14 @@ public class MongoDBMapper implements IDataAccess {
         return list;
     }
 
-    @Override
+    
     public List<City> getCitiesByBookTitle(String bookTitle) {
         throw new UnsupportedOperationException("Not supported yet.");
         //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Book> getBooksByAuthorName(String authorName) {
+    
+    public List<IBook> getBooksByAuthorName(String authorName) {
         throw new UnsupportedOperationException("Not supported yet.");
         //To change body of generated methods, choose Tools | Templates.
     }
