@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dataUnitTests;
+package mongoDBUnitTests;
 
 import databaseAccess.MongoDBMapper;
 import static org.hamcrest.CoreMatchers.equalTo;
