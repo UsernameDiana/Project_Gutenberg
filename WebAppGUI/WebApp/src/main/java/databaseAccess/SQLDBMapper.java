@@ -42,7 +42,6 @@ public class SQLDBMapper implements IDataAccess {
                 Long bookid = Long.parseLong(res.getString("bookid")) ;
                 String title = res.getString("tittle");
                 String name = res.getString("name");
-                System.out.println(bookid);
                 if(bookIds.contains(bookid))
                 {
                     IBook book = list.get(bookid);
@@ -50,7 +49,6 @@ public class SQLDBMapper implements IDataAccess {
                 }
                 else {
                     IBook book = new Book(bookid, title, name);
-                    System.out.println("testtestsetsetse");
                     list.put(bookid, book);
                     bookIds.add(bookid);
                 }

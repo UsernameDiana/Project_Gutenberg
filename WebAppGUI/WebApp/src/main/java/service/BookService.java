@@ -32,6 +32,8 @@ public class BookService extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         //-- Establish or reestablish application demainModeltext
         BookFacade bf = new BookFacade();
+        System.out.println("works works works");
+        
         String command = request.getParameter("command");
         switch (command) {
             case "getBooksByCityName":
@@ -44,25 +46,10 @@ public class BookService extends HttpServlet {
     public void getBooksByCityName(HttpServletRequest request, HttpServletResponse response, BookFacade bf) throws ServletException, IOException {
         String city = request.getParameter("city");
         Map<Long, IBook> books = bf.getBooksByCityName(city);
-        String output = "<table style=\"width:100%\" id=\"books\">\n"
-                + "  <tr>\n"
-                + "    <th>ID</th>\n"
-                + "    <th>Title</th> \n"
-                + "    <th>Author</th>\n"
-                + "  </tr>\n";
-        for (Map.Entry<Long, IBook> book : books.entrySet()) {
-            String authors = "";
-            for (String author : book.getValue().getAuthor()) {
-                authors += author + ", ";
-            }
-            output += "<tr>\n"
-                    + "<td>" + book.getKey() + "</td>"
-                    + "<td>" + book.getValue().getTitle() + "</td>"
-                    + "<td>" + authors + "</td>"
-                    + "</tr>\n";
-        }
-        output += "</table>";
-        response.getWriter().write(output);
+        
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().write("Success Data");
+        System.out.println("booom boom");
 //        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 //        dispatcher.forward(request, response);
 
