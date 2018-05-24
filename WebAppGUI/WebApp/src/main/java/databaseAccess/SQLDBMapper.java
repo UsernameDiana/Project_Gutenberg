@@ -11,11 +11,11 @@ import Interfaces.IDataAccess;
 import entity.Book;
 import entity.City;
 
-public class DBMapperSQL implements IDataAccess{
+public class SQLDBMapper implements IDataAccess{
 
-	private DBConnector sqlCon;
+	private SQLDBConnector sqlCon;
 
-	public DBMapperSQL(DBConnector sqlCon) {
+	public SQLDBMapper(SQLDBConnector sqlCon) {
 		this.sqlCon = sqlCon;
 	}
 

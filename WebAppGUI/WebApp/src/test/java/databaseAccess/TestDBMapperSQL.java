@@ -25,45 +25,53 @@ import org.junit.Before;
 public class TestDBMapperSQL {
 
     LocalConnection con = new LocalConnection();
+
     public TestDBMapperSQL() {
     }
 
-    
     @Before
-    public void setUp() throws SQLException{
-        
+    public void setUp() throws SQLException {
+        //Setting up the database
 //        TestPopulateDatabase testdb = new TestPopulateDatabase(con);
 //        testdb.populate();
-    }
-    
 
-    
+    }
+
+    @Test
+    public void TestConnection() {
+        Connection connected = con.getConnection();
+        assertNotNull(connected);
+
+    }
+
     @Test
     public void TestGetBooksByCityName() throws SQLException {
         List<Book> list = new ArrayList();
-//        List<Book> expected = new ArrayList("");
-        
+
         try {
             Connection connection = con.getConnection();
             Statement stmt = connection.createStatement();
             String cityName = "Paris";
-            assertTrue(cityName, true);
             String query = "SELECT DISTINCT b.bookid, title, city, name FROM Books b, Cities c, Authors a WHERE c.city = '" + cityName + "' AND b.bookid = c.bookid AND a.bookid = b.bookid;";
             ResultSet res = stmt.executeQuery(query);
-            assertEquals(res, stmt);
             while (res.next()) {
-                String title = res.getString("tittle");
+                String title = res.getString("title");
                 String name = res.getString("name");
                 list.add(new Book(title, name));
             }
-            System.out.println("List: " + list);
-//            assertArrayEquals(cityName, , actuals);
-//            assertArrayEquals(cityName, "The Picture of Dorian Gray", actuals);
-            
+            // Checking what we get from the query
+//            for(int i = 0; i < list.size(); i++) {
+//            System.out.println(list.get(i).getTitle());
+//        }
+//            for(int i = 0; i < list.size(); i++) {
+//            System.out.println(list.get(i).getAuthor());
+//        }
+            assertEquals(list.get(0).getTitle(), "The Picture of Dorian Gray");
+            assertEquals(list.get(0).getAuthor(), "Oscar Wilde");
+
         } catch (Exception e) {
-            System.out.println(e.toString());
+
         }
-        
     }
 
 }

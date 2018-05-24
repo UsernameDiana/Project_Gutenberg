@@ -10,22 +10,22 @@ import java.util.List;
  */
 public class DBFacade {
 
-    public DBMapperSQL dbsql;
+    public SQLDBMapper dbsql;
     public MongoDBMapper dbmongo;
-    public DBConnector dbcsql;
+    public SQLDBConnector dbcsql;
     public MongoDBConnector dbcmongo;
     private final Connection con;
     private static DBFacade instance;
 
     public DBFacade(){
         con = dbcsql.getInstance().getConnection();
-        dbsql = new DBMapperSQL(dbcsql);
+        dbsql = new SQLDBMapper(dbcsql);
         dbmongo = new MongoDBMapper(dbcmongo);
     }
 
     public DBFacade(Connection conn) {
         con = conn;
-        dbsql = new DBMapperSQL(dbcsql);
+        dbsql = new SQLDBMapper(dbcsql);
         dbmongo = new MongoDBMapper(dbcmongo);
     }
 

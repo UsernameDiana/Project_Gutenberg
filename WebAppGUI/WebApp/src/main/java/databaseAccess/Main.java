@@ -12,7 +12,7 @@ import entity.Book;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        DBMapperSQL sqlCon = new DBMapperSQL(new DBConnector());
+        SQLDBMapper sqlCon = new SQLDBMapper(new SQLDBConnector());
         //maybe
         //MongoDBMapper mongoCon = new MongoDBMapper(new MongoDBConnector());
 
