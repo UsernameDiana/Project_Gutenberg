@@ -3,6 +3,8 @@ package databaseAccess;
 import entity.*;
 import java.sql.Connection;
 import java.util.List;
+import Interfaces.IBook;
+import java.util.Map;
 
 /**
  *q
@@ -18,16 +20,10 @@ public class DBFacade {
     private static DBFacade instance;
 
     public DBFacade(){
-        con = dbcsql.getInstance().getConnection();
-        dbsql = new SQLDBMapper(dbcsql);
-        dbmongo = new MongoDBMapper(dbcmongo);
+        con = SQLDBConnector.getInstance().getConnection();
+        dbsql = new SQLDBMapper();
     }
 
-    public DBFacade(Connection conn) {
-        con = conn;
-        dbsql = new SQLDBMapper(dbcsql);
-        dbmongo = new MongoDBMapper(dbcmongo);
-    }
 
     public static DBFacade getInstance(){
         if (instance == null) {
@@ -36,8 +32,8 @@ public class DBFacade {
         return instance;
     }
     
-    public List<Book> getBooksByCityName(String cityName){
-        return dbsql.getBooksByCityName(cityName);
+    public Map<Long, IBook> getBooksByCityName(String cityName){
+        return dbsql.getBooksByCityName(cityName, con);
     }
 
 }

@@ -1,23 +1,17 @@
 <%-- 
-    Document   : response
-    Created on : May 14, 2018, 11:21:37 AM
-    Author     : diana
+    Document   : BooksByCityName
+    Created on : May 23, 2018, 2:40:38 PM
+    Author     : przyg
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="service.BookFacadeREST" %>
-<!--import the class with the info-->
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    
     <body>
-        <form action="getBooksByCityName">
-            
-            
-        </form>
+        <h1>Hello World!</h1>
     </body>
 </html>

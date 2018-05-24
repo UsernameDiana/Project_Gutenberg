@@ -7,7 +7,9 @@ package Interfaces;
 
 import entity.Book;
 import entity.City;
+import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -15,10 +17,10 @@ import java.util.List;
  */
 public interface IDataAccess {
 
-    public List<Book> getBooksByCityName(String cityName); //User Story # 1
+    public Map<Long, IBook> getBooksByCityName(String cityName, Connection con); //User Story # 1
 
     public List<City> getCitiesByBookTitle(String bookTitle); //User Story # 2
 
-    public List<Book> getBooksByAuthorName(String authorName); //User Story # 3
+    public List<IBook> getBooksByAuthorName(String authorName); //User Story # 3
 
 }

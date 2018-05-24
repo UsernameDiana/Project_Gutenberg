@@ -6,12 +6,12 @@
 package facade;
 
 import Interfaces.IBook;
-import Interfaces.IBookFacade;
 import databaseAccess.SQLDBConnector;
 import databaseAccess.DBFacade;
 import databaseAccess.SQLDBMapper;
 import entity.Book;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -19,36 +19,26 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author Nexao
  */
-public class BookFacade implements IBookFacade {
+public class BookFacade {
 
     EntityManagerFactory emf;
     Book book;
     DBFacade dbfacade;
 
-    public BookFacade(EntityManagerFactory emf) {
+    public BookFacade() {
         dbfacade = DBFacade.getInstance();
-        this.emf = emf;
     }
-
-    private EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-
-    public void addEntityManagerFactory(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-
-    public List<Book> getBooksByCity() {
+    public List<IBook> getBooksByCity() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Book> getBooksByCityName(String city) {
+   
+    public Map<Long, IBook> getBooksByCityName(String city) {
         return dbfacade.getBooksByCityName(city);
     }
 
-    @Override
-    public List<Book> getBooksByAuthorName(String author) {
+    
+    public List<IBook> getBooksByAuthorName(String author) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

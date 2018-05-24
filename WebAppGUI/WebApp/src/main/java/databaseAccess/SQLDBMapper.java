@@ -6,79 +6,101 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
+import Interfaces.IBook;
 import Interfaces.IDataAccess;
 import entity.Book;
 import entity.City;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-public class SQLDBMapper implements IDataAccess{
+public class SQLDBMapper implements IDataAccess {
 
-	private SQLDBConnector sqlCon;
+    private SQLDBConnector sqlCon;
 
-	public SQLDBMapper(SQLDBConnector sqlCon) {
-		this.sqlCon = sqlCon;
-	}
+    public SQLDBMapper() {
 
-	@Override
-	public List<Book> getBooksByCityName(String cityName) {
-		List<Book> list = new ArrayList();
+    }
 
-		try {
-			Connection connection = this.sqlCon.getConnection();
-			Statement stmt = connection.createStatement();
-			String query = "SELECT DISTINCT * FROM Books b, Cities c, Authors a WHERE c.city = '"+cityName+"' AND b.bookid = c.bookid AND a.bookid = b.bookid;";
-			ResultSet res = stmt.executeQuery(query);
-			while (res.next()) {
-			String title = res.getString("tittle");
-			String name = res.getString("name");
-			list.add(new Book(title, name));
-			}
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		return list;
-	}
+    public SQLDBMapper(SQLDBConnector sqlCon) {
+        this.sqlCon = sqlCon;
+    }
 
-	@Override
-	public List<City> getCitiesByBookTitle(String bookTitle) {
-		
-		List<City> list = new ArrayList();
+    @Override
+    public Map<Long, IBook> getBooksByCityName(String cityName, Connection con) {
+        Map<Long, IBook> list = new HashMap();
+        Set<Long> bookIds = new HashSet<>();
 
-		try {
-			Connection connection = this.sqlCon.getConnection();
-			Statement stmt = connection.createStatement();
-			String query = "SELECT DISTINCT * FROM Books b INNER JOIN Cities c  WHERE b.tittle = '"+bookTitle+"' AND b.bookid = c.bookid;";
-			ResultSet res = stmt.executeQuery(query);
-			while (res.next()) {
-			String city = res.getString("city");
-			list.add(new City(city));                        
-			}
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		return list;
-	}
+        try {
+            
+            Statement stmt = con.createStatement();
+            
+            String query = "SELECT DISTINCT b.bookid, tittle, city, name FROM Books b, Cities c, Authors a WHERE c.city = '" + cityName + "' AND b.bookid = c.bookid AND a.bookid = b.bookid;";
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                Long bookid = Long.parseLong(res.getString("bookid")) ;
+                String title = res.getString("tittle");
+                String name = res.getString("name");
+                System.out.println(bookid);
+                if(bookIds.contains(bookid))
+                {
+                    IBook book = list.get(bookid);
+                    book.addAuthor(name);
+                }
+                else {
+                    IBook book = new Book(bookid, title, name);
+                    System.out.println("testtestsetsetse");
+                    list.put(bookid, book);
+                    bookIds.add(bookid);
+                }
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return list;
+    }
 
-	@Override
-	public List<Book> getBooksByAuthorName(String authorName) {
-		
-		List<Book> list = new ArrayList();
-		
-		try {
-			Connection connection = this.sqlCon.getConnection();
-			Statement stmt = connection.createStatement();
-			String query = "SELECT DISTINCT * FROM Books b INNER JOIN Authors a  WHERE a.name = '"+authorName+"' AND b.bookid = a.bookid;";
-			ResultSet res = stmt.executeQuery(query);
-			while (res.next()) {
-			String title = res.getString("tittle");
-			list.add(new Book(title, authorName));
-			}
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		return list;
-	}
+    @Override
+    public List<City> getCitiesByBookTitle(String bookTitle) {
 
+        List<City> list = new ArrayList();
+
+        try {
+            Connection connection = this.sqlCon.getConnection();
+            Statement stmt = connection.createStatement();
+            String query = "SELECT DISTINCT * FROM Books b INNER JOIN Cities c  WHERE b.tittle = '" + bookTitle + "' AND b.bookid = c.bookid;";
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                String city = res.getString("city");
+                list.add(new City(city));
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return list;
+    }
+
+    @Override
+    public List<IBook> getBooksByAuthorName(String authorName) {
+
+        List<IBook> list = new ArrayList();
+
+        try {
+            Connection connection = this.sqlCon.getConnection();
+            Statement stmt = connection.createStatement();
+            String query = "SELECT DISTINCT * FROM Books b INNER JOIN Authors a  WHERE a.name = '" + authorName + "' AND b.bookid = a.bookid;";
+            ResultSet res = stmt.executeQuery(query);
+            while (res.next()) {
+                String title = res.getString("tittle");
+                list.add(new Book(title, authorName));
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return list;
+    }
 
 //	public List<Nodes> getAll() {
 //		List<Nodes> list = new ArrayList();
@@ -96,7 +118,6 @@ public class SQLDBMapper implements IDataAccess{
 //	}
 //
 //	
-
 //
 //	public List<Nodes> depthTwo(String name) {
 //		List<Nodes> list = new ArrayList();
@@ -194,5 +215,4 @@ public class SQLDBMapper implements IDataAccess{
 //		}
 //		return list;
 //	}
-	
 }

@@ -27,8 +27,8 @@ public class Main {
         List<Book> bblist = new ArrayList();
         List<Book> blist = new ArrayList();
 
-        blist = sqlCon.getBooksByAuthorName("John Lord");
-        bblist = sqlCon.getBooksByCityName("Paris");
+//        blist = sqlCon.getBooksByAuthorName("John Lord");
+//        bblist = sqlCon.getBooksByCityName("Paris");
 
         System.out.println("------------ 1st Query");
         for (IBook iBook : blist) {
