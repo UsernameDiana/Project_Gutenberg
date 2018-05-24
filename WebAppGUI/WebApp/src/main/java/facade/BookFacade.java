@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,9 +7,9 @@
 package facade;
 
 import Interfaces.IBook;
-import databaseAccess.DBConnector;
+import databaseAccess.SQLDBConnector;
 import databaseAccess.DBFacade;
-import databaseAccess.DBMapperSQL;
+import databaseAccess.SQLDBMapper;
 import entity.Book;
 import java.util.List;
 import java.util.Map;
@@ -43,3 +44,4 @@ public class BookFacade {
     }
 
 }
+

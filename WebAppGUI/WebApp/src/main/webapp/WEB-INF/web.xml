@@ -8,7 +8,7 @@
     <description></description>
     <display-name>BookRest</display-name>
     <servlet-name>BookRest</servlet-name>
-    <servlet-class>service.BookFacadeREST</servlet-class>
+    <servlet-class>service.BookService</servlet-class>
 </servlet>
 
 <servlet-mapping>

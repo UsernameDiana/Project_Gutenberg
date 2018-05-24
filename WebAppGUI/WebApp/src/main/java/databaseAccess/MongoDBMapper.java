@@ -40,9 +40,11 @@ public class MongoDBMapper {
     }
 
     
-    public List<IBook> getBooksByCityName(String cityName) {
 
-        List<IBook> list = new ArrayList();
+    public List<Book> getBooksByCityName(String cityName) {
+
+
+        List<Book> list = new ArrayList();
 
         try {
             MongoDatabase database = con.getDatabase(dbname);
@@ -66,7 +68,9 @@ public class MongoDBMapper {
     }
 
     
-    public List<IBook> getBooksByAuthorName(String authorName) {
+
+    public List<Book> getBooksByAuthorName(String authorName) {
+
         throw new UnsupportedOperationException("Not supported yet.");
         //To change body of generated methods, choose Tools | Templates.
     }

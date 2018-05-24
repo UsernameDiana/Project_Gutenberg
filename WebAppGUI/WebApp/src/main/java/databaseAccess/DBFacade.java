@@ -12,16 +12,16 @@ import java.util.Map;
  */
 public class DBFacade {
 
-    public DBMapperSQL dbsql;
+    public SQLDBMapper dbsql;
     public MongoDBMapper dbmongo;
-    public DBConnector dbcsql;
+    public SQLDBConnector dbcsql;
     public MongoDBConnector dbcmongo;
     private final Connection con;
     private static DBFacade instance;
 
     public DBFacade(){
-        con = DBConnector.getInstance().getConnection();
-        dbsql = new DBMapperSQL();
+        con = SQLDBConnector.getInstance().getConnection();
+        dbsql = new SQLDBMapper();
     }
 
 

@@ -32,7 +32,7 @@ public class MongoUnitTests {
     @Test
     @FileParameters("src/test/resources/UserStory1_mongodb.csv")
     public void getBooksByCityTest(String city, String title, String author) {
-        List<IBook> books;
+        List<Book> books;
         books = MongoDBMapper.getBooksByCityName(city);
         assertThat(books.get(0).getTitle(), CoreMatchers.is(equalTo(title)));
         //assertThat(books.get(0).getAuthor(), CoreMatchers.is(equalTo(author)));

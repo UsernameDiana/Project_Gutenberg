@@ -15,7 +15,9 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        BookFacade bf = new BookFacade();
+
+        SQLDBMapper sqlCon = new SQLDBMapper(new SQLDBConnector());
+
         //maybe
         //MongoDBMapper mongoCon = new MongoDBMapper(new MongoDBConnector());
 
@@ -30,8 +32,10 @@ public class Main {
         Map<Long, IBook> bblist = new HashMap();
         List<IBook> blist = new ArrayList();
 
-        blist = bf.getBooksByAuthorName("John Lord");
-        bblist = bf.getBooksByCityName("Paris");
+
+//        blist = sqlCon.getBooksByAuthorName("John Lord");
+//        bblist = sqlCon.getBooksByCityName("Paris");
+
 
         System.out.println("------------ 1st Query");
         for (IBook iBook : blist) {
