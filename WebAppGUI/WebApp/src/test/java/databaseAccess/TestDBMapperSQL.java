@@ -1,8 +1,8 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
+/////*
+//// * To change this license header, choose License Headers in Project Properties.
+//// * To change this template file, choose Tools | Templates
+//// * and open the template in the editor.
+//// */
 //package databaseAccess;
 //
 //import entity.Book;
@@ -18,10 +18,10 @@
 //import static org.junit.Assert.*;
 //import org.junit.Before;
 //
-///**
-// *
-// * @author Nexao
-// */
+/////**
+//// *
+//// * @author Nexao
+//// */
 //public class TestDBMapperSQL {
 //
 //    LocalConnection con = new LocalConnection();
@@ -32,8 +32,8 @@
 //    @Before
 //    public void setUp() throws SQLException {
 //        //Setting up the database
-////        TestPopulateDatabase testdb = new TestPopulateDatabase(con);
-////        testdb.populate();
+//////        TestPopulateDatabase testdb = new TestPopulateDatabase(con);
+//////        testdb.populate();
 //
 //    }
 //
@@ -60,14 +60,14 @@
 //                list.add(new Book(title, name));
 //            }
 //            // Checking what we get from the query
-////            for(int i = 0; i < list.size(); i++) {
-////            System.out.println(list.get(i).getTitle());
-////        }
-////            for(int i = 0; i < list.size(); i++) {
-////            System.out.println(list.get(i).getAuthor());
-////        }
-//            assertEquals(list.get(0).getTitle(), "The Picture of Dorian Gray");
-//            assertEquals(list.get(0).getAuthor(), "Oscar Wilde");
+//////            for(int i = 0; i < list.size(); i++) {
+//////            System.out.println(list.get(i).getTitle());
+//////        }
+//////            for(int i = 0; i < list.size(); i++) {
+//////            System.out.println(list.get(i).getAuthor());
+//////        }
+//            assertEquals(list.get(1).getTitle(), "The Picture of Dorian Gray");
+//            assertEquals(list.get(1).getAuthor(), "Oscar Wilde");
 //
 //        } catch (Exception e) {
 //
