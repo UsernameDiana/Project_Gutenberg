@@ -25,8 +25,8 @@ public class StepDefinitions {
     static WebDriver driver;
     MongoDBMapper mapper = new MongoDBMapper();
 
-    @Given("^The city name is $")
-    public void user_pick_city_name(String city) throws Throwable {
+    @Given("^Opening the page$")
+    public void user_opens_page() throws Throwable {
         driver = new ChromeDriver();
         driver.navigate().to("http://localhost:8080/WebApp/");
     }
@@ -44,8 +44,8 @@ public class StepDefinitions {
         
     }
 
-    @Then("^I should get a page with books'(.*)'$")
-    public void user_gets_all_books_with_mentioned_city_name(String result) throws Throwable {
+    @Then("^I should get results$")
+    public void user_gets_all_books_with_mentioned_city_name() throws Throwable {
         Assert.assertTrue("Result page", driver.getTitle().equals("Result page"));
     }
 }
