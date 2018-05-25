@@ -60,12 +60,12 @@
 //                list.add(new Book(title, name));
 //            }
 //            // Checking what we get from the query
-//////            for(int i = 0; i < list.size(); i++) {
-//////            System.out.println(list.get(i).getTitle());
-//////        }
-//////            for(int i = 0; i < list.size(); i++) {
-//////            System.out.println(list.get(i).getAuthor());
-//////        }
+//            for(int i = 0; i < list.size(); i++) {
+//            System.out.println(list.get(i).getTitle());
+//        }
+//            for(int i = 0; i < list.size(); i++) {
+//                System.out.println(list.get(i).getAuthor());
+//        }
 //            assertEquals(list.get(1).getTitle(), "The Picture of Dorian Gray");
 //            assertEquals(list.get(1).getAuthor(), "Oscar Wilde");
 //
