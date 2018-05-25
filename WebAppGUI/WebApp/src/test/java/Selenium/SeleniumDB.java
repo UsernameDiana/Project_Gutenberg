@@ -1,4 +1,4 @@
-package selenium;
+package Selenium;
 
 import java.util.List;
 import org.junit.*;
@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class SeleniumDB {
 
     static WebDriver driver;
-    private static final int WAIT_MAX = 4;
+    private static final int WAIT_MAX = 10;
 
     @BeforeClass
     public static void setup() {
@@ -47,11 +47,12 @@ public class SeleniumDB {
     @Test
     public void test1() {
 
+        // test for existing city
         setup();
 
         try {
             Select droplist = new Select(driver.findElement(By.id("option")));
-            droplist.selectByIndex(3);
+            droplist.selectByIndex(3); // 3 = city
 
             WebElement filter = driver.findElement(By.name("city"));
             filter.sendKeys("Riga");
@@ -68,35 +69,29 @@ public class SeleniumDB {
 
     }
 
-//    @Test
-//    public void test2() {
-//
-//        setup();
-//
-//        WebElement filter = driver.findElement(By.name("city"));
-//        filter.sendKeys("New York");
-//
-//        WebElement body = driver.findElement(By.name("Submit"));
-//        body.click();
-//
-//        List<WebElement> books = driver.findElements(By.tagName("tr"));
-//        Assert.assertTrue(books.size() == 1);
-//
-//    }
-//
-//    @Test
-//    public void test3() {
-//
-//        setup();
-//
-//        WebElement filter = driver.findElement(By.name("city"));
-//        filter.sendKeys("");
-//
-//        WebElement body = driver.findElement(By.name("Submit"));
-//        body.click();
-//
-//        List<WebElement> books = driver.findElements(By.tagName("tr"));
-//        Assert.assertTrue(books.size() == 1);
-//
-//    }
+    @Test
+    public void test2() {
+
+        // test for a city in `Title`, should return emply table
+        setup();
+
+        try {
+            Select droplist = new Select(driver.findElement(By.id("option")));
+            droplist.selectByIndex(2); // 2 = title
+
+            WebElement filter = driver.findElement(By.name("title"));
+            filter.sendKeys("Riga");
+
+            WebElement body = driver.findElement(By.name("Submit"));
+            body.click();
+
+            List<WebElement> books = driver.findElements(By.id("modal2"));
+            Assert.assertTrue(books.isEmpty());
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
 }

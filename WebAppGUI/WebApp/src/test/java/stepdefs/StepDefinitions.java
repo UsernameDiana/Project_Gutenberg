@@ -27,17 +27,11 @@ public class StepDefinitions {
         driver.navigate().to("http://localhost:8080/WebApp/");
     }
 
-//    @When("^Entering city '(.*)'$")
-//    public void click_on_form(String city) throws Throwable {
-//        driver.findElement(By.name("BookRestful").click());
-//        
-//    }
-    
     @When("^Entering city '(.*)'$")
     public void user_enters_city_name(String city) throws Throwable {
         driver.findElement(By.name("BookRestful")).sendKeys("Paris");
         driver.findElement(By.name("submit")).click();
-        
+
     }
 
     @Then("^I should get results$")
