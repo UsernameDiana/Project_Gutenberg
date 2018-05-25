@@ -29,8 +29,8 @@ public class SeleniumDB {
     public static void setup() {
 
         // Call it in each test, otherwise it won't make a window for that test.
-        
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Nexao\\Downloads\\chromedriver_win32\\chromedriver.exe");
+//        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Nexao\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/Users/diana/Downloads/chromedriver.exe");
 
         driver = new ChromeDriver();
         driver.get("http://localhost:8080/WebApp/");
@@ -53,7 +53,7 @@ public class SeleniumDB {
 
     @Test
     public void test1() {
-        
+
         WebElement filter = driver.findElement(By.name("city"));
         filter.sendKeys("Copenhagen");
 
@@ -68,7 +68,7 @@ public class SeleniumDB {
     public void test2() {
 
         setup();
-        
+
         WebElement filter = driver.findElement(By.name("city"));
         filter.sendKeys("New York");
 
@@ -77,14 +77,14 @@ public class SeleniumDB {
 
         List<WebElement> books = driver.findElements(By.tagName("tr"));
         Assert.assertTrue(books.size() == 1);
-        
+
     }
-    
+
     @Test
-    public void test3(){
-        
+    public void test3() {
+
         setup();
-        
+
         WebElement filter = driver.findElement(By.name("city"));
         filter.sendKeys("");
 
@@ -93,7 +93,7 @@ public class SeleniumDB {
 
         List<WebElement> books = driver.findElements(By.tagName("tr"));
         Assert.assertTrue(books.size() == 1);
-        
+
     }
 
 }
