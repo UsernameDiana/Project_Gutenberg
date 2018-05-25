@@ -20,8 +20,8 @@ public interface IDataAccess {
 
     public Map<Long, IBook> getBooksByCityName(String cityName, Connection con); //User Story # 1
 
-    public List<City> getCitiesByBookTitle(String bookTitle); //User Story # 2
+    public List<City> getCityByBookTitle(String bookTitle, Connection con); //User Story # 2
 
-    public List<IBook> getBooksByAuthorName(String authorName); //User Story # 3
+    public Map<Long, IBook> getBooksByAuthor(String authorName, Connection con); //User Story # 3
 
 }

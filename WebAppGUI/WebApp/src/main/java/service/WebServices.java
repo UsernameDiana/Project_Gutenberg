@@ -9,7 +9,9 @@ import Interfaces.IBook;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import entity.City;
 import facade.BookFacade;
+import java.util.List;
 import java.util.Map;
 import javafx.scene.chart.PieChart;
 import javax.ws.rs.core.Context;
@@ -47,12 +49,12 @@ public class WebServices {
      * Retrieves representation of an instance of rest.MembersService
      * @return an instance of java.lang.String
      */
-    @GET
-    @Path("list")
+    @POST
+    @Path("byAuthor")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        System.out.println("Hello Hello");
-        Map<Long, IBook> books = bf.getBooksByCityName("Copenhagen");
+    public String byAuthorJSON(String content) {
+        Map<Long, IBook> books = bf.getBooksByAuthor(content);
         return gson.toJson(books);
     }
 
@@ -61,11 +63,20 @@ public class WebServices {
      * @param content representation for the resource
      */
     @POST
-    @Path("later")
+    @Path("byCity")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String putJson(String content) {
+    public String byCityJSON(String content) {
         Map<Long, IBook> books = bf.getBooksByCityName(content);
         return gson.toJson(books);
+    }
+    
+    @POST
+    @Path("byBook")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String byBookJSON(String content) {
+        List<City> cities = bf.getCityByBookTitle(content);
+        return gson.toJson(cities);
     }
 }

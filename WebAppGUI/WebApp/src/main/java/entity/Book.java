@@ -40,7 +40,7 @@ public class Book implements IBook, Serializable {
         this.author.add(author);
     }
 
-    public Book(String title, String author, City city) {
+    public Book(Long bookid, String title, String author, City city) {
         this.title = title;
         this.author.add(author);
         this.cities.add(city);

@@ -11,6 +11,7 @@ import databaseAccess.SQLDBConnector;
 import databaseAccess.DBFacade;
 import databaseAccess.SQLDBMapper;
 import entity.Book;
+import entity.City;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -29,8 +30,8 @@ public class BookFacade {
     public BookFacade() {
         dbfacade = DBFacade.getInstance();
     }
-    public List<IBook> getBooksByCity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<City> getCityByBookTitle(String book) {
+        return dbfacade.getCityByBookTitle(book);
     }
 
    
@@ -39,8 +40,8 @@ public class BookFacade {
     }
 
     
-    public List<IBook> getBooksByAuthorName(String author) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Map<Long, IBook> getBooksByAuthor(String author) {
+        return dbfacade.getBooksByAuthor(author);
     }
 
 }
