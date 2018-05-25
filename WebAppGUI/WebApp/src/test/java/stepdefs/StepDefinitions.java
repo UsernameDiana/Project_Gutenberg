@@ -9,8 +9,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import databaseAccess.MongoDBMapper;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +21,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class StepDefinitions {
 
     static WebDriver driver;
-    MongoDBMapper mapper = new MongoDBMapper();
 
     @Given("^Opening the page$")
     public void user_opens_page() throws Throwable {
