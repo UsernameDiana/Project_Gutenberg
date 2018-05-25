@@ -11,7 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -19,106 +22,121 @@ import java.util.stream.Collectors;
  *
  */
 public class App {
-	private static boolean headerIsFinished = false;
-	private static ArrayList<Author> authorList = new ArrayList<Author>();
-	private static ArrayList<Book> bookList = new ArrayList<Book>();
-	private static ArrayList<City> cityList = new ArrayList<City>();
 
-	public static void main(String[] args) throws IOException {
-		// The name of the file to open.
-		int bookID = 0;
-		List<File> filesInFolder = Files
-				.walk(Paths.get("/Users/diana/Desktop/git/Project_Gutenberg/TxtToCSV/booksfortesting"))
-				.filter(p -> p.getFileName().toString().endsWith(".txt")).map(Path::toFile)
-				.collect(Collectors.toList());
+    private static boolean headerIsFinished = false;
+    private static ArrayList<Author> authorList = new ArrayList<Author>();
+    private static ArrayList<Book> bookList = new ArrayList<Book>();
+    private static ArrayList<City> cityList = new ArrayList<City>();
 
-		for (File file : filesInFolder) {
-			// This will reference one line at a time
-			String line = null;
-			try {
-				// FileReader reads text files in the default encoding.
-				FileReader fileReader = new FileReader(file);
+    public static void main(String[] args) throws IOException {
+        // The name of the file to open.
+        List<Set<String>> containingCities = new ArrayList<>();
+        int bookID = 0;
+        ReadCities read = new ReadCities();
+        Map<String, ListCity> listedCities = read.list();
+        List<File> filesInFolder = Files
+                .walk(Paths.get("C:\\Users\\przyg\\Desktop\\New\\Project_Gutenberg\\TxtToCSV\\booksfortesting"))
+                .filter(p -> p.getFileName().toString().endsWith(".txt")).map(Path::toFile)
+                .collect(Collectors.toList());
+        containingCities.add(new HashSet<>());
+        for (File file : filesInFolder) {
+            // This will reference one line at a time
+            String line = null;
+            try {
+                // FileReader reads text files in the default encoding.
+                FileReader fileReader = new FileReader(file);
 
-				// Always wrap FileReader in BufferedReader.
-				BufferedReader bufferedReader = new BufferedReader(fileReader);
+                // Always wrap FileReader in BufferedReader.
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-				
-				while ((line = bufferedReader.readLine()) != null) {
-					
-					if (!headerIsFinished) {
-						if (line.contains("Title: ")) {
-							String[] list = line.split(": ");
-							String name = list[1].replaceAll("[^a-zA-Z0-9 ]", "");
-							bookList.add(new Book(name, bookID));
-						} 
-						if (line.contains("Author: ")) {
-							String[] list = line.split(": ");
-							authorList.add(new Author(list[1], bookID));
-						}
-					}
-					
-					if ((line.contains("*** START") || line.contains("***START")) && !headerIsFinished) {
-						headerIsFinished = true;
-					}
-					
-					if (headerIsFinished) {
-						line = line.replaceAll("[^a-zA-Z0-9 ]", "");
-						String[] words = line.split(" ");
-						for (String string : words) {
-							if (string.length() > 3) {
-								if (Character.isUpperCase(string.charAt(0))
-										&& Character.isLowerCase(string.charAt(1))) {
-									cityList.add(new City(string, bookID));
-								}
-							}
-						}
-					}
-				}
+                while ((line = bufferedReader.readLine()) != null) {
 
-				// Always close files.
-				bufferedReader.close();
-			} catch (FileNotFoundException ex) {
-				System.out.println("Unable to open file '" + file + "'");
-			} catch (IOException ex) {
-				System.out.println("Error reading file '" + file + "'");
-				// Or we could just do this:
-				// ex.printStackTrace();
-			}
-			bookID++;
-			headerIsFinished = false;
-		}
-		
-		FileWriter fw = new FileWriter("C:\\Users\\przyg\\Downloads\\soft\\soft\\book_download\\Downloads\\Books.csv", true);
-	    BufferedWriter bw = new BufferedWriter(fw);
-	    bw.write("bookid,title,");
-	    bw.newLine();
-	    for (Book book : bookList) {
+                    if (!headerIsFinished) {
+                        if (line.contains("Title: ")) {
+                            String[] list = line.split(": ");
+                            String name = list[1].replaceAll("[^a-zA-Z0-9 ]", "");
+                            name += " " + bufferedReader.readLine();
+                            bookList.add(new Book(name, bookID));
+                        }
+                        if (line.contains("Author: ")) {
+                            
+                            String[] list = line.split(": ");
+                            list[1] = list[1].replaceAll("[^a-zA-Z0-9 ]", "");
+                            String[] newList = list[1].split(" and ");
+                            for (String string : newList) {
+                            authorList.add(new Author(string, bookID));
+                            }
+                        }
+                    }
 
-		    bw.write(book.bookID +","+book.title+",");
-		    bw.newLine();
-		}
-	    bw.close();
-	    fw = new FileWriter("C:\\Users\\przyg\\Downloads\\soft\\soft\\book_download\\Downloads\\Authors.csv", true);
-	    bw = new BufferedWriter(fw);
-	    bw.write("name,bookid,");
-	    bw.newLine();
-	    for (Author author : authorList) {
+                    if ((line.contains("*** START") || line.contains("***START")) && !headerIsFinished) {
+                        headerIsFinished = true;
+                    }
 
-		    bw.write(author.name +","+author.bookID+",");
-		    bw.newLine();
-		}
-	    bw.close();
-	    fw = new FileWriter("C:\\Users\\przyg\\Downloads\\soft\\soft\\book_download\\Downloads\\Cities.csv", true);
-	    bw = new BufferedWriter(fw);
-	    bw.write("city,bookid,");
-	    bw.newLine();
-	    for (City city : cityList) {
+                    if (headerIsFinished) {
+                        line = line.replaceAll("[^a-zA-Z0-9 ]", "");
+                        String[] words = line.split(" ");
+                        for (String string : words) {
+                            if (string.length() > 3) {
+                                if (Character.isUpperCase(string.charAt(0))
+                                        && Character.isLowerCase(string.charAt(1))) {
+                                    if (listedCities.containsKey(string)) {
+                                        if (!containingCities.get(bookID).contains(string)) {
+                                            cityList.add(new City(string, bookID, listedCities.get(string).getLatitude(), listedCities.get(string).getLongitude()));
+                                            containingCities.get(bookID).add(string);
+                                        } 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
-		    bw.write(city.name +","+city.bookID+",");
-		    bw.newLine();
-		}
-	    bw.close();
+                // Always close files.
+                bufferedReader.close();
+            } catch (FileNotFoundException ex) {
+                System.out.println("Unable to open file '" + file + "'");
+            } catch (IOException ex) {
+                System.out.println("Error reading file '" + file + "'");
+                // Or we could just do this:
+                // ex.printStackTrace();
+            }
+            containingCities.add(new HashSet<>());
+            bookID++;
+            headerIsFinished = false;
+        }
 
-	}
+        FileWriter fw = new FileWriter("C:\\Users\\przyg\\Downloads\\soft\\soft\\book_download\\Downloads\\Books.csv", true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write("bookid,title,");
+        bw.newLine();
+        for (Book book : bookList) {
+
+            bw.write(book.bookID + "," + book.title + ",");
+            bw.newLine();
+        }
+        bw.close();
+        fw = new FileWriter("C:\\Users\\przyg\\Downloads\\soft\\soft\\book_download\\Downloads\\Authors.csv", true);
+        bw = new BufferedWriter(fw);
+        bw.write("name,bookid,");
+        bw.newLine();
+        for (Author author : authorList) {
+
+            bw.write(author.name + "," + author.bookID + ",");
+            bw.newLine();
+        }
+        bw.close();
+        fw = new FileWriter("C:\\Users\\przyg\\Downloads\\soft\\soft\\book_download\\Downloads\\Cities.csv", true);
+        bw = new BufferedWriter(fw);
+        bw.write("city,bookid,latitude,longitude");
+        bw.newLine();
+        for (City city : cityList) {
+
+            bw.write(city.name + "," + city.bookID + "," + city.latitude + "," + city.longitude);
+            bw.newLine();
+        }
+        bw.close();
+
+    }
 
 }
