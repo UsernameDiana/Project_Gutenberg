@@ -31,30 +31,40 @@ public class SQLDBMapper implements IDataAccess {
     public Map<Long, IBook> getBooksByCityName(String cityName, Connection con) {
         Map<Long, IBook> list = new HashMap();
         Set<Long> bookIds = new HashSet<>();
+        Set<String> cities = new HashSet<>();
 
+        Set<String> authors = new HashSet<>();
         try {
-            
+
             Statement stmt = con.createStatement();
-            
-            String query = "SELECT DISTINCT b.bookid, tittle, city, name FROM Books b, Cities c, Authors a WHERE c.city = '" + cityName + "' AND b.bookid = c.bookid AND a.bookid = b.bookid;";
+
+            String query = "SELECT DISTINCT b.bookid, tittle, city, name, latitude, longitude FROM Books b, Cities c, Authors a WHERE c.city = '" + cityName + "' AND b.bookid = c.bookid AND a.bookid = b.bookid;";
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
-                Long bookid = Long.parseLong(res.getString("bookid")) ;
+                Long bookid = Long.parseLong(res.getString("bookid"));
                 String title = res.getString("tittle");
                 String name = res.getString("name");
-                System.out.println(bookid);
-                if(bookIds.contains(bookid))
-                {
+                String city = res.getString("city");
+                String lat = res.getString("latitude");
+                String lon = res.getString("longitude");
+                if (bookIds.contains(bookid)) {
                     IBook book = list.get(bookid);
-                    book.addAuthor(name);
-                }
-                else {
-                    IBook book = new Book(bookid, title, name);
-                    System.out.println("testtestsetsetse");
+                    if (!authors.contains(name)) {
+                        book.addAuthor(name);
+                        authors.add(name);
+                    }
+                    if (!cities.contains(city)) {
+                        book.addCity(new City(city, Double.parseDouble(lon), Double.parseDouble(lat)));
+                        cities.add(city);
+                    }
+                } else {
+                    IBook book = new Book(bookid, title, name, new City(city, Double.parseDouble(lon), Double.parseDouble(lat)));
                     list.put(bookid, book);
+                    cities.add(city);
                     bookIds.add(bookid);
+                    authors.add(name);
                 }
-                
+
             }
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -63,18 +73,19 @@ public class SQLDBMapper implements IDataAccess {
     }
 
     @Override
-    public List<City> getCitiesByBookTitle(String bookTitle) {
+    public List<City> getCityByBookTitle(String bookTitle, Connection con) {
 
         List<City> list = new ArrayList();
 
         try {
-            Connection connection = this.sqlCon.getConnection();
-            Statement stmt = connection.createStatement();
-            String query = "SELECT DISTINCT * FROM Books b INNER JOIN Cities c  WHERE b.tittle = '" + bookTitle + "' AND b.bookid = c.bookid;";
+            Statement stmt = con.createStatement();
+            String query = "SELECT DISTINCT city, latitude, longitude FROM Books b INNER JOIN Cities c  WHERE b.tittle = '" + bookTitle + "' AND b.bookid = c.bookid;";
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
                 String city = res.getString("city");
-                list.add(new City(city));
+                String lat = res.getString("latitude");
+                String lon = res.getString("longitude");
+                list.add(new City(city, Double.parseDouble(lon), Double.parseDouble(lat)));
             }
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -83,18 +94,43 @@ public class SQLDBMapper implements IDataAccess {
     }
 
     @Override
-    public List<IBook> getBooksByAuthorName(String authorName) {
+    public Map<Long, IBook> getBooksByAuthor(String authorName, Connection con) {
 
-        List<IBook> list = new ArrayList();
+        Map<Long, IBook> list = new HashMap();
+        Set<Long> bookIds = new HashSet<>();
+        Set<String> authors = new HashSet<>();
 
+        Set<String> cities = new HashSet<>();
         try {
-            Connection connection = this.sqlCon.getConnection();
-            Statement stmt = connection.createStatement();
-            String query = "SELECT DISTINCT * FROM Books b INNER JOIN Authors a  WHERE a.name = '" + authorName + "' AND b.bookid = a.bookid;";
+            Statement stmt = con.createStatement();
+            String query = "SELECT DISTINCT b.bookid, tittle, city, name, latitude, longitude FROM Books b, Cities c, Authors a WHERE a.name = '" + authorName + "' AND b.bookid = c.bookid AND a.bookid = b.bookid;";
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
+                Long bookid = Long.parseLong(res.getString("bookid"));
                 String title = res.getString("tittle");
-                list.add(new Book(title, authorName));
+                String name = res.getString("name");
+                String city = res.getString("city");
+                String lat = res.getString("latitude");
+                String lon = res.getString("longitude");
+                if (bookIds.contains(bookid)) {
+                    IBook book = list.get(bookid);
+                    if (!authors.contains(name)) {
+                        book.addAuthor(name);
+                        authors.add(name);
+                    }
+                    if (!cities.contains(city)) {
+                        book.addCity(new City(city, Double.parseDouble(lon), Double.parseDouble(lat)));
+                        cities.add(city);
+                    }
+                    
+                } else {
+                    IBook book = new Book(bookid, title, name, new City(city, Double.parseDouble(lon), Double.parseDouble(lat)));
+                    list.put(bookid, book);
+                    bookIds.add(bookid);
+                    authors.add(name);
+                    cities.add(city);
+                }
+
             }
         } catch (Exception e) {
             System.out.println(e.toString());

@@ -12,6 +12,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.in;
 import entity.Book;
+import Interfaces.IBook;
 import entity.City;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,9 @@ public class MongoDBMapper {
     }
 
     
+
     public List<Book> getBooksByCityName(String cityName) {
+
 
         List<Book> list = new ArrayList();
 
@@ -65,7 +68,9 @@ public class MongoDBMapper {
     }
 
     
+
     public List<Book> getBooksByAuthorName(String authorName) {
+
         throw new UnsupportedOperationException("Not supported yet.");
         //To change body of generated methods, choose Tools | Templates.
     }

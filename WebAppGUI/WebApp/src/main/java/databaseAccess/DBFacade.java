@@ -31,9 +31,16 @@ public class DBFacade {
         }
         return instance;
     }
-    
+      public Map<Long, IBook> getBooksByAuthor(String author) {
+        return dbsql.getBooksByAuthor(author, con);
+    }
+      
     public Map<Long, IBook> getBooksByCityName(String cityName){
         return dbsql.getBooksByCityName(cityName, con);
+    }
+    
+    public List<City> getCityByBookTitle(String book) {
+        return dbsql.getCityByBookTitle(book, con);
     }
 
 }
