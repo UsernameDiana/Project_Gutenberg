@@ -30,10 +30,10 @@ public class SeleniumDB {
 
         // Call it in each test, otherwise it won't make a window for that test.
         
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Nexao\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src\\test\\java\\Selenium\\chromedriver.exe");
 
         driver = new ChromeDriver();
-        driver.get("http://localhost:8080/WebApp/");
+        driver.get("http://localhost:58663/WebApp/");
     }
 
     @AfterClass

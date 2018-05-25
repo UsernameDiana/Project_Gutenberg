@@ -7,9 +7,7 @@ package databaseAccess;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  *
@@ -27,7 +25,7 @@ public class LocalConnection {
             
 //            System.out.println("Just did the DRIVER ");
             
-             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb", "root", "root1");
+             connection = DriverManager.getConnection("jdbc:derby://localhost:1527/Testdata", "", "");
              
             System.out.println("Connected to Testdata ");
                        
