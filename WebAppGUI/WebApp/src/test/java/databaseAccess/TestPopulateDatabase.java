@@ -18,8 +18,9 @@ import java.sql.Statement;
  */
 public class TestPopulateDatabase {
 
-    private static final String FILENAME = "C:\\Users\\Plamen\\Documents\\NetBeansProjects\\Project_Gutenberg\\WebAppGUI\\WebApp\\src\\test\\java\\databaseAccess\\Testdb.sql";
-
+//    private static final String FILENAME = "C:\\Users\\Plamen\\Documents\\NetBeansProjects\\Project_Gutenberg\\WebAppGUI\\WebApp\\src\\test\\java\\databaseAccess\\Testdb.sql";
+    private static final String FILENAME = "/Users/diana/Desktop/git/Project_Gutenberg/WebAppGUI/WebApp/src/test/java/databaseAccess/Testdb.sql";
+    
     private LocalConnection sqlCon;
 
     public TestPopulateDatabase(LocalConnection sqlCon) {

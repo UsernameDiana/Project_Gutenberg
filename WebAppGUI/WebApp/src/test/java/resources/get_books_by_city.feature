@@ -1,7 +1,7 @@
 Feature: Get Books By City
     As a User
-    I want [feature]
-    So that I get in return a list of books
+    I want to type in a city
+    So that I get a list of books in return
 
  Scenario Outline: Enter Valid City name
     Given Opening the page

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Selenium;
 
 import java.util.List;
@@ -13,27 +8,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-/**
- *
- * @author Nexao
- */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SeleniumDB {
 
     static WebDriver driver;
-    private static final int WAIT_MAX = 4;
+    private static final int WAIT_MAX = 10;
 
     @BeforeClass
     public static void setup() {
 
-        // Call it in each test, otherwise it won't make a window for that test.
-        
-        System.setProperty("webdriver.chrome.driver", "src\\test\\java\\Selenium\\chromedriver.exe");
-
+//        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Nexao\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
-        driver.get("http://localhost:58663/WebApp/");
+        driver.get("http://localhost:8080/WebApp/");
+
     }
 
     @AfterClass
@@ -45,55 +36,62 @@ public class SeleniumDB {
     public void test() {
 
         (new WebDriverWait(driver, WAIT_MAX)).until((ExpectedCondition<Boolean>) (WebDriver d) -> {
-            WebElement el = driver.findElement(By.name("city"));
+            WebElement el = driver.findElement(By.id("option"));
+            WebElement button = driver.findElement(By.id("submit"));
             Assert.assertNotNull(el);
+            Assert.assertNotNull(button);
             return true;
         });
     }
 
     @Test
     public void test1() {
-        
-        WebElement filter = driver.findElement(By.name("city"));
-        filter.sendKeys("Copenhagen");
 
-        WebElement body = driver.findElement(By.name("Submit"));
-        body.click();
+        // test for existing city
+        setup();
 
-        List<WebElement> books = driver.findElements(By.tagName("tr"));
-        Assert.assertTrue(books.size() == 13);
+        try {
+            Select droplist = new Select(driver.findElement(By.id("option")));
+            droplist.selectByIndex(3); // 3 = city
+
+            WebElement filter = driver.findElement(By.name("city"));
+            filter.sendKeys("Riga");
+
+            WebElement body = driver.findElement(By.name("Submit"));
+            body.click();
+
+            List<WebElement> books = driver.findElements(By.id("modal2"));
+            Assert.assertTrue(books.size() == 3);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
     @Test
     public void test2() {
 
+        // test for a city in `Title`, should return emply table
         setup();
-        
-        WebElement filter = driver.findElement(By.name("city"));
-        filter.sendKeys("New York");
 
-        WebElement body = driver.findElement(By.name("Submit"));
-        body.click();
+        try {
+            Select droplist = new Select(driver.findElement(By.id("option")));
+            droplist.selectByIndex(2); // 2 = title
 
-        List<WebElement> books = driver.findElements(By.tagName("tr"));
-        Assert.assertTrue(books.size() == 1);
-        
-    }
-    
-    @Test
-    public void test3(){
-        
-        setup();
-        
-        WebElement filter = driver.findElement(By.name("city"));
-        filter.sendKeys("");
+            WebElement filter = driver.findElement(By.name("title"));
+            filter.sendKeys("Riga");
 
-        WebElement body = driver.findElement(By.name("Submit"));
-        body.click();
+            WebElement body = driver.findElement(By.name("Submit"));
+            body.click();
 
-        List<WebElement> books = driver.findElements(By.tagName("tr"));
-        Assert.assertTrue(books.size() == 1);
-        
+            List<WebElement> books = driver.findElements(By.id("modal2"));
+            Assert.assertTrue(books.isEmpty());
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
 }
