@@ -8,8 +8,8 @@ package dataUnitTests;
 import databaseAccess.MongoDBMapper;
 import static org.hamcrest.CoreMatchers.equalTo;
 import junitparams.FileParameters;
-import entity.Book;
 import Interfaces.IBook;
+import java.util.ArrayList;
 import java.util.List;
 import org.hamcrest.CoreMatchers;
 import static org.junit.Assert.assertThat;
@@ -32,7 +32,7 @@ public class MongoUnitTests {
     @Test
     @FileParameters("src/test/resources/UserStory1_mongodb.csv")
     public void getBooksByCityTest(String city, String title, String author) {
-        List<Book> books;
+        List<IBook> books = new ArrayList();
         books = MongoDBMapper.getBooksByCityName(city);
         assertThat(books.get(0).getTitle(), CoreMatchers.is(equalTo(title)));
         //assertThat(books.get(0).getAuthor(), CoreMatchers.is(equalTo(author)));

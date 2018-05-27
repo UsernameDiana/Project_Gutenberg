@@ -1,9 +1,9 @@
 package databaseAccess;
 
+import Interfaces.IBook;
 import entity.*;
 import java.sql.Connection;
 import java.util.List;
-import Interfaces.IBook;
 import java.util.Map;
 
 /**
@@ -22,6 +22,7 @@ public class DBFacade {
     public DBFacade(){
         con = SQLDBConnector.getInstance().getConnection();
         dbsql = new SQLDBMapper();
+        dbmongo = new MongoDBMapper();
     }
 
 
