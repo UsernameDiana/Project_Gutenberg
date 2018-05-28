@@ -35,7 +35,7 @@ public class App {
         ReadCities read = new ReadCities();
         Map<String, ListCity> listedCities = read.list();
         List<File> filesInFolder = Files
-                .walk(Paths.get("C:\\Users\\przyg\\Desktop\\New\\Project_Gutenberg\\TxtToCSV\\booksfortesting"))
+                .walk(Paths.get("C:\\Users\\przyg\\Downloads\\soft\\soft\\book_download\\Downloads"))
                 .filter(p -> p.getFileName().toString().endsWith(".txt")).map(Path::toFile)
                 .collect(Collectors.toList());
         containingCities.add(new HashSet<>());
@@ -48,29 +48,45 @@ public class App {
 
                 // Always wrap FileReader in BufferedReader.
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
-
+                boolean titleNotFound = false;
+                boolean titleFound = false;
+                boolean nameNotFound = false;
+                boolean nameFound = false;
                 while ((line = bufferedReader.readLine()) != null) {
 
                     if (!headerIsFinished) {
                         if (line.contains("Title: ")) {
                             String[] list = line.split(": ");
                             String name = list[1].replaceAll("[^a-zA-Z0-9 ]", "");
-                            name += " " + bufferedReader.readLine();
+                            if (!bufferedReader.readLine().replaceAll("[^a-zA-Z0-9 ]", "").equals("")) {
+                                name += " " + bufferedReader.readLine().replaceAll("[^a-zA-Z0-9 ]", "");
+                            }
+                            titleFound = true;
                             bookList.add(new Book(name, bookID));
+                        } else {
+                            titleNotFound = true;
                         }
                         if (line.contains("Author: ")) {
-                            
+                            nameFound = true;
                             String[] list = line.split(": ");
                             list[1] = list[1].replaceAll("[^a-zA-Z0-9 ]", "");
                             String[] newList = list[1].split(" and ");
                             for (String string : newList) {
-                            authorList.add(new Author(string, bookID));
+                                authorList.add(new Author(string, bookID));
                             }
+                        } else {
+                            nameNotFound = true;
                         }
                     }
 
                     if ((line.contains("*** START") || line.contains("***START")) && !headerIsFinished) {
                         headerIsFinished = true;
+                        if (titleNotFound && !titleFound) {
+                            bookList.add(new Book("TitleNotFound-" + bookID, bookID));
+                        }
+                        if (nameNotFound && !nameFound) {
+                            authorList.add(new Author("NameNotFound-" + bookID, bookID));
+                        }
                     }
 
                     if (headerIsFinished) {
@@ -84,7 +100,7 @@ public class App {
                                         if (!containingCities.get(bookID).contains(string)) {
                                             cityList.add(new City(string, bookID, listedCities.get(string).getLatitude(), listedCities.get(string).getLongitude()));
                                             containingCities.get(bookID).add(string);
-                                        } 
+                                        }
                                     }
                                 }
                             }
@@ -112,7 +128,7 @@ public class App {
         bw.newLine();
         for (Book book : bookList) {
 
-            bw.write(book.bookID + "," + book.title + ",");
+            bw.write(book.bookID + "," + book.title);
             bw.newLine();
         }
         bw.close();
@@ -122,7 +138,7 @@ public class App {
         bw.newLine();
         for (Author author : authorList) {
 
-            bw.write(author.name + "," + author.bookID + ",");
+            bw.write(author.name + "," + author.bookID);
             bw.newLine();
         }
         bw.close();
