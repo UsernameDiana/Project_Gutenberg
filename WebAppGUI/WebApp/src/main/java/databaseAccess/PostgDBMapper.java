@@ -5,7 +5,6 @@
  */
 package databaseAccess;
 import Interfaces.IBook;
-import Interfaces.IDataAccess;
 import entity.City;
 import java.sql.Connection;
 import java.util.List;
