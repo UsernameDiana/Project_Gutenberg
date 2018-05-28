@@ -25,11 +25,11 @@ and has high performance. As we have mentioned before, we were already familiar 
 
 ## Data modeled in the databases.
 
-![]()
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/33677203_10156226634078260_903855346089459712_n.jpg)
 
 Relational Diagram for SQL and Postgres database
 
-![]()
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/33689282_10156226642068260_4830412012569755648_n.jpg)
 
 Relational Diagram for Mongo database
 
