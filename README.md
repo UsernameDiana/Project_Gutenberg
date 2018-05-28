@@ -25,13 +25,13 @@ and has high performance. As we have mentioned before, we were already familiar 
 
 ## Data modeled in the databases.
 
-![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.24.12.png)
+![]()
 
-ER Diagram for SQL and Postgres database
+Relational Diagram for SQL and Postgres database
 
-![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.24.51.png)
+![]()
 
-ER Diagram for Mongo database
+Relational Diagram for Mongo database
 
 ## Data modeled in application
 
