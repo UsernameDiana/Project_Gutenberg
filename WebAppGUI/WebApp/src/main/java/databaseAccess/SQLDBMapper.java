@@ -29,6 +29,7 @@ public class SQLDBMapper implements IDataAccess {
 
     @Override
     public Map<Long, IBook> getBooksByCityName(String cityName, Connection con) {
+        System.out.println(cityName);
         Map<Long, IBook> list = new HashMap();
         Set<Long> bookIds = new HashSet<>();
         Set<String> cities = new HashSet<>();
@@ -38,11 +39,11 @@ public class SQLDBMapper implements IDataAccess {
 
             Statement stmt = con.createStatement();
 
-            String query = "SELECT DISTINCT b.bookid, tittle, city, name, latitude, longitude FROM Books b, Cities c, Authors a WHERE c.city = '" + cityName + "' AND b.bookid = c.bookid AND a.bookid = b.bookid;";
+            String query = "SELECT DISTINCT b.bookid, title, city, name, latitude, longitude FROM Books b, Cities c, Authors a WHERE c.city = '" + cityName + "' AND b.bookid = c.bookid AND a.bookid = b.bookid;";
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
                 Long bookid = Long.parseLong(res.getString("bookid"));
-                String title = res.getString("tittle");
+                String title = res.getString("title");
                 String name = res.getString("name");
                 String city = res.getString("city");
                 String lat = res.getString("latitude");
@@ -74,17 +75,18 @@ public class SQLDBMapper implements IDataAccess {
 
     @Override
     public List<City> getCityByBookTitle(String bookTitle, Connection con) {
-
+        System.out.println("Start: " + bookTitle);
         List<City> list = new ArrayList();
 
         try {
             Statement stmt = con.createStatement();
-            String query = "SELECT DISTINCT city, latitude, longitude FROM Books b INNER JOIN Cities c  WHERE b.tittle = '" + bookTitle + "' AND b.bookid = c.bookid;";
+            String query = "SELECT DISTINCT city, latitude, longitude FROM Books b INNER JOIN Cities c  WHERE b.title = '" + bookTitle + "' AND b.bookid = c.bookid;";
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
                 String city = res.getString("city");
                 String lat = res.getString("latitude");
                 String lon = res.getString("longitude");
+                System.out.println(city + " " + lat + " " + lon);
                 list.add(new City(city, Double.parseDouble(lon), Double.parseDouble(lat)));
             }
         } catch (Exception e) {
@@ -103,11 +105,11 @@ public class SQLDBMapper implements IDataAccess {
         Set<String> cities = new HashSet<>();
         try {
             Statement stmt = con.createStatement();
-            String query = "SELECT DISTINCT b.bookid, tittle, city, name, latitude, longitude FROM Books b, Cities c, Authors a WHERE a.name = '" + authorName + "' AND b.bookid = c.bookid AND a.bookid = b.bookid;";
+            String query = "SELECT DISTINCT b.bookid, title, city, name, latitude, longitude FROM Books b, Cities c, Authors a WHERE a.name = '" + authorName + "' AND b.bookid = c.bookid AND a.bookid = b.bookid;";
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
                 Long bookid = Long.parseLong(res.getString("bookid"));
-                String title = res.getString("tittle");
+                String title = res.getString("title");
                 String name = res.getString("name");
                 String city = res.getString("city");
                 String lat = res.getString("latitude");
@@ -139,11 +141,11 @@ public class SQLDBMapper implements IDataAccess {
     }
 
     @Override
-    public Map<Long, IBook> getCitiesByBookInVicinity(float lat, float lng, int radius, Connection con) {
+    public Map<Long, IBook> getBooksInVicinity(float lat, float lng, int radius, Connection con) {
         Map<Long, IBook> books = new HashMap<>();
         try {
             Statement stmt = con.createStatement();
-            String query = "SELECT DISTINCT b.bookid, tittle, name , (\n"
+            String query = "SELECT DISTINCT b.bookid, title, name , (\n"
                     + " 6371 * acos(\n"
                     + " cos( radians(" + lat + ") )\n"
                     + " * cos( radians( latitude ) )\n"
@@ -156,7 +158,7 @@ public class SQLDBMapper implements IDataAccess {
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
                 Long bookid = Long.parseLong(res.getString("bookid"));
-                String title = res.getString("tittle");
+                String title = res.getString("title");
                 String name = res.getString("name");
                 books.put(bookid, new Book(bookid, title, name));
             }
