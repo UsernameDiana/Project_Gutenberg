@@ -25,10 +25,11 @@ public class Main {
 //        MongoDBConnector con = new MongoDBConnector();
 //        MongoDatabase mongodb = con.getDatabase();
 //        MongoDBMapper mMap = new MongoDBMapper();
-//        PostgDBConnector postgconn = new PostgDBConnector();
-//        Connection con = postgconn.getConnection();
-//        PostgDBMapper postgCon = new PostgDBMapper();
-//        System.out.println("books" + postgCon.getBooksByCityName("Paris", con));
+        PostgDBConnector postgconn = new PostgDBConnector();
+        Connection con = postgconn.getConnection();
+        PostgDBMapper postgCon = new PostgDBMapper();
+        
+        System.out.println("books" + postgCon.getBooksByCityName("Paris", con));
         
         
 //        MongoCollection<Document> collection = mongodb.getCollection("books");
