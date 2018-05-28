@@ -8,10 +8,11 @@ package facade;
 
 import Interfaces.IBook;
 import databaseAccess.SQLDBConnector;
-import databaseAccess.DBFacade;
+import databaseAccess.MysqlControlFacade;
 import databaseAccess.SQLDBMapper;
 import entity.Book;
 import entity.City;
+import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -21,14 +22,14 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author Nexao
  */
-public class BookFacade {
+public class MysqlFacade {
 
     EntityManagerFactory emf;
     Book book;
-    DBFacade dbfacade;
+    MysqlControlFacade dbfacade;
 
-    public BookFacade() {
-        dbfacade = DBFacade.getInstance();
+    public MysqlFacade() {
+        dbfacade = MysqlControlFacade.getInstance();
     }
     public List<City> getCityByBookTitle(String book) {
         return dbfacade.getCityByBookTitle(book);
@@ -44,5 +45,8 @@ public class BookFacade {
         return dbfacade.getBooksByAuthor(author);
     }
 
+     public Map<Long, IBook> getBooksInVincinity(float lat, float lng, int radius){
+        return dbfacade.getBooksInVincinity(lat, lng, radius);
+    }
 }
 

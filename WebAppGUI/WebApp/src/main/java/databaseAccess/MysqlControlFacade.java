@@ -10,24 +10,24 @@ import java.util.Map;
  *q
  * @author Nexao
  */
-public class DBFacade {
+public class MysqlControlFacade {
 
     public SQLDBMapper dbsql;
     public MongoDBMapper dbmongo;
     public SQLDBConnector dbcsql;
     public MongoDBConnector dbcmongo;
     private final Connection con;
-    private static DBFacade instance;
+    private static MysqlControlFacade instance;
 
-    public DBFacade(){
+    public MysqlControlFacade(){
         con = SQLDBConnector.getInstance().getConnection();
         dbsql = new SQLDBMapper();
     }
 
 
-    public static DBFacade getInstance(){
+    public static MysqlControlFacade getInstance(){
         if (instance == null) {
-            instance = new DBFacade();
+            instance = new MysqlControlFacade();
         }
         return instance;
     }
@@ -41,6 +41,10 @@ public class DBFacade {
     
     public List<City> getCityByBookTitle(String book) {
         return dbsql.getCityByBookTitle(book, con);
+    }
+    
+    public Map<Long, IBook> getBooksInVincinity(float lat, float lng, int radius){
+        return dbsql.getBooksInVincinity(lat, lng, radius, con);
     }
 
 }
