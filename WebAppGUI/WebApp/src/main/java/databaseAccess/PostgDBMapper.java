@@ -141,7 +141,7 @@ public class PostgDBMapper {
     }
 
     
-    public Map<Long, IBook> getBooksInVincinity(float lat, float lng, int radius, Connection con) {
+    public Map<Long, IBook> getBooksInVicinity(float lat, float lng, int radius, Connection con) {
        Map<Long, IBook> books = new HashMap<>();
         try {
             Statement stmt = con.createStatement();
