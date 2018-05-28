@@ -6,17 +6,17 @@ import java.sql.DriverManager;
 public class PostgDBConnector {
 
     private Connection connection = null;
-    private static SQLDBConnector instance;
+    private static PostgDBConnector instance;
     //Constants
-    private static final String URL = "jdbc:mysql://46.101.57.37:3306/project?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private static final String USERNAME = "remote";
-    private static final String PASSWORD = "test";
+    private static final String URL = "jdbc:postgresql://46.101.57.37:5432";
+    private static final String USERNAME = "gutenberg";
+    private static final String PASSWORD = "gutenberg1";
    
 
     public PostgDBConnector() {
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
             this.connection = null;
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (Exception e) {
@@ -24,10 +24,10 @@ public class PostgDBConnector {
         }
     }
     
-    public static SQLDBConnector getInstance()
+    public static PostgDBConnector getInstance()
     {
         if (instance == null)
-            instance = new SQLDBConnector();
+            instance = new PostgDBConnector();
         return instance;
     }
 
