@@ -87,11 +87,11 @@ Finally we have 3 CSV files which we can use to populate our databases.
 
 To import the data to databases, for SQL we ran the syntax from Neo4j assignment notes:
 
-```LOAD DATA LOCAL INFILE '/path/to/social_network_nodes.csv'
+`LOAD DATA LOCAL INFILE '/path/to/social_network_nodes.csv'
 INTO TABLE gutenberg.Books
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
-(bookid,title)```
+(bookid,title)`
 
 For mongoDB we used MongoDB Compass that we connected to the droplet as well
 and just imported data from the csv files.
