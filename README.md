@@ -147,35 +147,55 @@ JS - Zygi
 Index.jsp - Zygi
 
 Source Packages:
+
 Interface - Everybody
 
-Database Access
+Database Access:
+
 MongoControlFacade - Zygi
+
 MongoDBConnector - Diana and Plamen
+
 MongoDBMapper - Diana, Emil and Zygi
+
 MysqlControlFacade - Emil and Zygi
+
 PostGresControlFacade - Zygi
+
 PostgDBConnector - Diana and Plamen
-PostgDBMapper - Plamen and Diana
+
+PostgDBMapper - Diana and Plamen
+
 SQLDBConnector - Everybody
+
 SQLDBMapper - Zygi
 
-Entity
+Entity:
+
 Book - Diana, Emil
+
 City - Diana, Emil
 
-Facade
+Facade:
+
 MongoFacade - Zygi
+
 MysqlFacade - Emil and Plamen
+
 PostgresFacade - Diana and Plamen
 
-Service
+Service:
+
 WebServices - Zygi and Emil
 
 Creation of databases:
+
 SQL - Zygi and Emil
+
 MongoDB - Diana, Emil and Zygi
+
 Postgres - Plamen and Diana
 
 Report:
+
 Emil, Diana and Plamen
