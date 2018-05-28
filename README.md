@@ -76,7 +76,7 @@ appears a second time, then we ignore it. However, we only get one worded
 cities with this method. So for example a city like “New York” would be split
 into two, thereby getting “New” and “York”.
 
-![]()
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.38.19.png)
 
 In this class we are reading from the lists that we created in the first part,
 and are then putting in into the respective CSV’s.
@@ -96,4 +96,24 @@ LINES TERMINATED BY '\n'
 For mongoDB we used MongoDB Compass that we connected to the droplet as well
 and just imported data from the csv files.
 
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.40.00.png)
+
+## Behavior of query test set.
+Including a discussion on how much of the query runtime is influenced by the
+DB engine and what is influenced by the application frontend.
+We did jmeter tests on our server to see how queries behaved.
+For some reason we could only see the mongodb on the server when doing stress test.
+
 ![]()
+
+Here we see the first one failing to connect as we gave it a wrong path just
+to test the connection. Then afterwards we get it the right path and 15
+threads, which gave us the result.
+
+![]()
+
+Here we can see the Cpu is very low (only 0.7) We then tried with 1.000.000
+threads and had the exact same output, so we assume that the jmeter test is
+not exactly sending what we had hoped for.
+
+## Recommendation, for which database engine to use in such a project for production.
