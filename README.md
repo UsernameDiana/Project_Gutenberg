@@ -60,7 +60,7 @@ by creating java application TxtToCsv with fileReader and fileWritter, one
 which would read from all the books, and then one which would write to the CSV file.
 The csv files where then located on a droplet in DigitalOcean.
 
-![]()
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.36.12.png)
 
 Here we read from the books. We are doing 3 things here, getting the Titles,
 the Authors and the Cities and then we put it into lists. When we go through a
@@ -75,3 +75,25 @@ making sure that there are no duplicates by using “Distinct” so that if a ci
 appears a second time, then we ignore it. However, we only get one worded
 cities with this method. So for example a city like “New York” would be split
 into two, thereby getting “New” and “York”.
+
+![]()
+
+In this class we are reading from the lists that we created in the first part,
+and are then putting in into the respective CSV’s.
+For each book / author / city we add a bookid, which we then ensure is added
+for the right value by using the ID we added for each book in the previous section.
+Thereby ensuring that we don’t add info about a wrong book.
+Finally we have 3 CSV files which we can use to populate our databases.
+
+To import the data to databases, for SQL we ran the syntax from Neo4j assignment notes:
+
+```LOAD DATA LOCAL INFILE '/path/to/social_network_nodes.csv'
+INTO TABLE gutenberg.Books
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+(bookid,title);```
+
+For mongoDB we used MongoDB Compass that we connected to the droplet as well
+and just imported data from the csv files.
+
+![]()
