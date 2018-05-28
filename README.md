@@ -1,9 +1,6 @@
 # Project_Gutenberg
 
-Emil Klausen
-Zygimantas Pranka
-Diana Strele
-Plamen Getsov
+Emil Klausen, Zygimantas Pranka, Diana Strele, Plamen Getsov
 
 The goal of This project is to build an application that queries different
 databases, with the end goal of giving a recommendation for a DBMS from one of
