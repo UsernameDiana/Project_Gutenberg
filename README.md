@@ -23,7 +23,8 @@ as we went a long and it ended up taking quite a bit longer than expected.
 
 ### Postgres
 Third choice is Postgres object-relational database system as it is readable
-and has high performance.
+and has high performance. As we have mentioned before, we were already familiar with SQL syntax, so the queries were not the new information here. Setting it up and fiddling with the server took a bit more effort.
+
 
 ## Data modeled in the databases.
 
@@ -87,11 +88,11 @@ Finally we have 3 CSV files which we can use to populate our databases.
 
 To import the data to databases, for SQL we ran the syntax from Neo4j assignment notes:
 
-`LOAD DATA LOCAL INFILE '/path/to/social_network_nodes.csv'
+```LOAD DATA LOCAL INFILE '/path/to/social_network_nodes.csv'
 INTO TABLE gutenberg.Books
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY ''
 LINES TERMINATED BY '\n'
-(bookid,title)`
+(bookid,title)```
 
 For mongoDB we used MongoDB Compass that we connected to the droplet as well
 and just imported data from the csv files.
