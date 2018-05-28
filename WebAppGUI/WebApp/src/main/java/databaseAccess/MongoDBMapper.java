@@ -28,7 +28,7 @@ import org.bson.Document;
 
 /**
  *
- * @author diana
+ * @author Zygi and Emil
  */
 public class MongoDBMapper {
 
@@ -88,16 +88,112 @@ public class MongoDBMapper {
         return listBooks;
     }
 
+    public List<City> getCitiesByBookTitle(String bookTitle) {
 
+        System.out.println("Connecting with Mongo");
+        mongoCon = new MongoDBConnector();
+        MongoDatabase db = mongoCon.getDatabase();
+        List<City> cityList = new ArrayList<>();
+        MongoCollection<Document> bookCol = db.getCollection(booksCol);
+
+        AggregateIterable<Document> cities = bookCol.aggregate(Arrays.asList(
+                new Document("$match", new Document("title", bookTitle)),
+                new Document("$sort", new Document("bookid", 1)),
+                new Document("$limit", 200),
+                new Document("$lookup", new Document("from", "Cities")
+                        .append("localField", "bookid")
+                        .append("foreignField", "bookid")
+                        .append("as", "C")
+                ),
+                new Document("$project", new Document("bookid", 1)
+                        .append("_id", 1)
+                        .append("C.city", 1)
+                        .append("C.latitude", 1)
+                        .append("C.longitude", 1)
+                        .append("title", 1)
+                )
+        ));
+
+        for (Document dbObject : cities) {
+            System.out.println(dbObject);
+////            System.out.println("Object" + dbObject);
+////            Long bookId = Long.parseLong(dbObject.get("bookid").toString());´
+            List cList = (List) dbObject.get("C");
+            for (Object city : cList) {
+                String name = ((Document) city).get("city").toString();
+                double lat = Double.parseDouble(((Document) city).get("latitude").toString());
+                double lon = Double.parseDouble(((Document) city).get("longitude").toString());
+                cityList.add(new City(name, lon, lat));
             }
 
 ////            System.out.println(bookId + " " + title + " " + authorsList);
 ////        MongoCursor<Document> booksDoc = bookCol.find().iterator();
         }
+//        List<IBook> list = new ArrayList();
+        return cityList;
+
     }
 
-    public List<City> getCitiesByBookTitle(String bookTitle) {
+    public Map<Long, IBook> getBooksByAuthorName(String authorName) {
+        System.out.println("Connecting with Mongo");
+        mongoCon = new MongoDBConnector();
+        MongoDatabase db = mongoCon.getDatabase();
+        Map<Long, IBook> listBooks = new HashMap<>();
+        MongoCollection<Document> authorCol = db.getCollection(authorsCol);
 
+        AggregateIterable<Document> books = authorCol.aggregate(Arrays.asList(
+                new Document("$match", new Document("name", authorName)),
+                new Document("$sort", new Document("bookid", 1)),
+                new Document("$limit", 200),
+                new Document("$lookup", new Document("from", "Books")
+                        .append("localField", "bookid")
+                        .append("foreignField", "bookid")
+                        .append("as", "Title")
+                ),
+                new Document("$lookup", new Document("from", "Cities")
+                        .append("localField", "bookid")
+                        .append("foreignField", "bookid")
+                        .append("as", "City")
+                ),
+                new Document("$project", new Document("bookid", 1)
+                        .append("_id", 1)
+                        .append("name", 1)
+                        .append("Title.title", 1)
+                        .append("City.city", 1)
+                        .append("City.latitude", 1)
+                        .append("City.longitude", 1)
+                )));
+
+        Set<String> cityName = new HashSet<>();
+        List<City> list = new ArrayList<>();
+        for (Document dbObject : books) {
+            System.out.println(dbObject);
+            String author = dbObject.get("name").toString();
+            Long bookId = Long.parseLong(dbObject.get("bookid").toString());
+            String title = ((Document) ((List) dbObject.get("Title")).get(0)).get("title").toString();
+            List cities = (List) dbObject.get("City");
+            for (Object city : cities) {
+//                System.out.println(city);
+                String name = ((Document) city).get("city").toString();
+                double lat = Double.parseDouble(((Document) city).get("latitude").toString());
+                double lon = Double.parseDouble(((Document) city).get("longitude").toString());
+                if (!cityName.contains(name)) {
+                    list.add(new City(name, lon, lat));
+                    cityName.add(name);
+                }
+
+            }
+            //System.out.println(bookId + " " + title + " " + author + " " + list);
+            listBooks.put(bookId, new Book(bookId, title, author, list));
+
+        }
+//        MongoCursor<Document> booksDoc = bookCol.find().iterator();
+
+        //List<IBook> list = new ArrayList();
+        return listBooks;
+    }
+
+    public Map<Long, IBook> getCitiesByBookInVicinity(double lan, double lon) {
 
 //        System.out.println("Connecting with Mongo");
 //        mongoCon = new MongoDBConnector();
@@ -135,37 +231,3 @@ public class MongoDBMapper {
     }
 
 }
-        System.out.println("Connecting with Mongo");
-        mongoCon = new MongoDBConnector();
-        MongoDatabase db = mongoCon.getDatabase();
-        List<City> cityList = new ArrayList<>();
-        MongoCollection<Document> bookCol = db.getCollection(booksCol);
-
-        AggregateIterable<Document> cities = bookCol.aggregate(Arrays.asList(
-                new Document("$match", new Document("title", bookTitle)),
-                new Document("$sort", new Document("bookid", 1)),
-                new Document("$limit", 200),
-                new Document("$lookup", new Document("from", "Cities")
-                        .append("localField", "bookid")
-                        .append("foreignField", "bookid")
-                        .append("as", "C")
-                ),
-                new Document("$project", new Document("bookid", 1)
-                        .append("_id", 1)
-                        .append("C.city", 1)
-                        .append("C.latitude", 1)
-                        .append("C.longitude", 1)
-                        .append("title", 1)
-                )
-        ));
-
-        for (Document dbObject : cities) {
-            System.out.println(dbObject);
-////            System.out.println("Object" + dbObject);
-////            Long bookId = Long.parseLong(dbObject.get("bookid").toString());´
-            List cList = (List) dbObject.get("C");
-            for (Object city : cList) {
-                String name = ((Document) city).get("city").toString();
-                double lat = Double.parseDouble(((Document) city).get("latitude").toString());
-                double lon = Double.parseDouble(((Document) city).get("longitude").toString());
-                cityList.add(new City(name, lon, lat));

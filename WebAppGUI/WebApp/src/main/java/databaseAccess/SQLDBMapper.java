@@ -251,4 +251,9 @@ public class SQLDBMapper implements IDataAccess {
 //		}
 //		return list;
 //	}
+
+    @Override
+    public Map<Long, IBook> getCitiesByBookInVicinity(double lat, double lon) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
