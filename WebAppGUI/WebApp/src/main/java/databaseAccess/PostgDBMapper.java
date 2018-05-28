@@ -82,7 +82,7 @@ public class PostgDBMapper {
 
         try {
             Statement stmt = con.createStatement();
-            String query = "SELECT DISTINCT c.city, c.latitude, c.longitude FROM books b INNER JOIN cities c ON b.title = '" + bookTitle + "' AND b.bookid = c.bookid;";
+            String query = "SELECT DISTINCT city, latitude, longitude FROM books b INNER JOIN cities c ON b.title = '" + bookTitle + " ' AND b.bookid = c.bookid;";
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
                 String city = res.getString("city");
