@@ -104,16 +104,78 @@ DB engine and what is influenced by the application frontend.
 We did jmeter tests on our server to see how queries behaved.
 For some reason we could only see the mongodb on the server when doing stress test.
 
-![]()
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.42.32.png)
 
 Here we see the first one failing to connect as we gave it a wrong path just
 to test the connection. Then afterwards we get it the right path and 15
 threads, which gave us the result.
 
-![]()
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.43.20.png)
 
 Here we can see the Cpu is very low (only 0.7) We then tried with 1.000.000
 threads and had the exact same output, so we assume that the jmeter test is
 not exactly sending what we had hoped for.
 
 ## Recommendation, for which database engine to use in such a project for production.
+
+We think that SQL is the best of the databases that we used, as it was very
+simple to just change up the queries if needed, where for example mongoDB took
+some time figuring out, both with what to use and how to use it. For example,
+in SQL we could easily combine tables, where in mongo it was a little harder
+(only just implemented recently) where you could use “$Lookup” and then merge tables.
+
+![]()
+
+This however only includes one other tables, so we would have to this for each
+table and then in the end we would have to project the fields with “$project” as such:
+
+![]()
+
+Where in SQL we could do it like:
+
+![]()
+
+And then getting exactly what we wanted from just one query, it may be longer,
+but it’s very easy to understand what’s going on, so more readable.
+
+
+### Work Distributable of project Gutenberg
+
+Webpages:
+Bootstrap - Zygi
+JS - Zygi
+Index.jsp - Zygi
+
+Source Packages:
+Interface - Everybody
+
+Database Access
+MongoControlFacade - Zygi
+MongoDBConnector - Diana and Plamen
+MongoDBMapper - Diana, Emil and Zygi
+MysqlControlFacade - Emil and Zygi
+PostGresControlFacade - Zygi
+PostgDBConnector - Diana and Plamen
+PostgDBMapper - Plamen and Diana
+SQLDBConnector - Everybody
+SQLDBMapper - Zygi
+
+Entity
+Book - Diana, Emil
+City - Diana, Emil
+
+Facade
+MongoFacade - Zygi
+MysqlFacade - Emil and Plamen
+PostgresFacade - Diana and Plamen
+
+Service
+WebServices - Zygi and Emil
+
+Creation of databases:
+SQL - Zygi and Emil
+MongoDB - Diana, Emil and Zygi
+Postgres - Plamen and Diana
+
+Report:
+Emil, Diana and Plamen
