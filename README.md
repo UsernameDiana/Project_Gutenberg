@@ -152,7 +152,7 @@ Interface - Everybody
 
 MongoControlFacade - Zygi
 
-MongoDBConnector - Diana and Plamen
+MongoDBConnector - Diana, Plamen and Zygi
 
 MongoDBMapper - Diana, Emil and Zygi
 
@@ -162,7 +162,7 @@ PostGresControlFacade - Zygi
 
 PostgDBConnector - Diana and Plamen
 
-PostgDBMapper - Diana and Plamen
+PostgDBMapper - Diana, Plamen and Zygi
 
 SQLDBConnector - Everybody
 
@@ -178,9 +178,9 @@ City - Diana, Emil
 
 MongoFacade - Zygi
 
-MysqlFacade - Emil and Plamen
+MysqlFacade - Emil, Plamen and Zygi
 
-PostgresFacade - Diana and Plamen
+PostgresFacade - Diana, Plamen and Zygi
 
 * Creation of databases:
 
