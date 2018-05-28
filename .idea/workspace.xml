@@ -16,8 +16,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="135" column="125" lean-forward="false" selection-start-line="135" selection-start-column="125" selection-end-line="135" selection-end-column="125" />
+            <state relative-caret-position="-777">
+              <caret line="91" column="50" lean-forward="false" selection-start-line="91" selection-start-column="50" selection-end-line="91" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -72,11 +72,6 @@
             <path>
               <item name="Project_Gutenberg" type="b2602c69:ProjectViewProjectNode" />
               <item name="Project_Gutenberg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Project_Gutenberg" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Project_Gutenberg" type="462c0819:PsiDirectoryNode" />
-              <item name="screenshots" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -184,8 +179,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="135" column="125" lean-forward="false" selection-start-line="135" selection-start-column="125" selection-end-line="135" selection-end-column="125" />
+        <state relative-caret-position="-777">
+          <caret line="91" column="50" lean-forward="false" selection-start-line="91" selection-start-column="50" selection-end-line="91" selection-end-column="50" />
           <folding />
         </state>
       </provider>
