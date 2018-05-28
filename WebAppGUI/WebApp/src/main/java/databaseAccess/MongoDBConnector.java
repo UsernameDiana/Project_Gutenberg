@@ -7,7 +7,7 @@ import com.mongodb.client.MongoDatabase;
 
 /**
  *
- * @author diana
+ * @author Zygi and Emil
  */
 public class MongoDBConnector {
 

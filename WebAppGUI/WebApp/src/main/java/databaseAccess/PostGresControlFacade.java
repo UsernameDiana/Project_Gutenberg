@@ -44,7 +44,7 @@ public class PostGresControlFacade {
         return psql.getCityByBookTitle(book, con);
     }
     
-    public Map<Long, IBook> getBooksInVincinity(float lat, float lng, int radius){
-        return psql.getBooksInVincinity(lat, lng, radius, con);
+    public Map<Long, IBook> getBooksInVicinity(float lat, float lng, int radius){
+        return psql.getBooksInVicinity(lat, lng, radius, con);
     }
 }

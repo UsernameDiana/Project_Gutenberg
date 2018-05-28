@@ -38,7 +38,7 @@ public class PostgresFacade {
         return pcf.getBooksByAuthor(author);
     }
 
-     public Map<Long, IBook> getCitiesByBookInVicinity(float lat, float lng, int radius){
-        return pcf.getBooksInVincinity(lat, lng, radius);
+     public Map<Long, IBook> getBooksInVicinity(float lat, float lng, int radius){
+        return pcf.getBooksInVicinity(lat, lng, radius);
     }
 }

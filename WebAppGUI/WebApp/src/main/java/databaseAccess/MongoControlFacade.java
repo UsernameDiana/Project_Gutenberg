@@ -30,19 +30,19 @@ public class MongoControlFacade {
         }
         return instance;
     }
-//      public Map<Long, IBook> getBooksByAuthor(String author) {
-//        return mgsql.getBooksByAuthor(author);
-//    }
-//      
-//    public Map<Long, IBook> getBooksByCityName(String cityName){
-//        return mgsql.getBooksByCityName(cityName);
-//    }
-//    
-//    public List<City> getCityByBookTitle(String book) {
-//        return mgsql.getCityByBookTitle(book);
-//    }
-//    
-//    public Map<Long, IBook> getBooksInVincinity(float lat, float lng, int radius){
-//        return mgsql.getBooksInVincinity(lat, lng, radius);
-//    }
+      public Map<Long, IBook> getBooksByAuthor(String author) {
+        return mgsql.getBooksByAuthor(author);
+    }
+      
+    public Map<Long, IBook> getBooksByCityName(String cityName){
+        return mgsql.getBooksByCityName(cityName);
+    }
+    
+    public List<City> getCityByBookTitle(String book) {
+        return mgsql.getCityByBookTitle(book);
+    }
+    
+    public Map<Long, IBook> getBooksInVicinity(float lat, float lng, int radius){
+        return mgsql.getBooksInVicinity(lat, lng, radius);
+    }
 }

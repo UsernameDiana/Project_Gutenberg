@@ -69,12 +69,14 @@ $(document).ready(function () {
                     $('#modal2').find('thead:last').html("");
                     $('#modal2').find('tbody:last').html("");
                     var citySet = new Set();
-                    $.each(data, function (key) {
-                        var location = {lat: myLat, lng: myLong};
+                    var location = {lat: myLat, lng: myLong};
                         var map = new google.maps.Map(document.getElementById('map'), {
                             zoom: 2,
                             center: location
                         });
+
+                    $.each(data, function (key) {
+                        
                         var booksInfo = data[key];
                         var row = "";
                         var head = "";
@@ -83,29 +85,39 @@ $(document).ready(function () {
                         var object = [];
                         var i = 0;
                         $.each(booksInfo, function (type, value) {
+//                            console.log(type);
+//                            console.log(value);
                             object[i] = value;
-                            if (i == 0) {
+                            if (type.toUpperCase() !== "CITIES") {
                                 head = head + "<th>" + type.toUpperCase();
                                 +"</th>";
                                 row = row + "<td>" + JSON.stringify(value) + "</td>";
                             }
                             i++;
+                            
                         });
-                        $.each(object[2], function (type, value) {
+
+                        $.each(object[3], function (type, value) {
                             var location = [];
                             var i = 0;
+
                             $.each(value, function (type, value) {
                                 location[i] = value;
                                 i++;
                             });
+
                             if (!citySet.has(location[0])) {
                                 citySet.add(location[0]);
+                                console.log(location[0], location[1], location[2]);
+
+                                
                                 var myLatLng = {lat: location[2], lng: location[1]};
                                 var marker = new google.maps.Marker({
                                     position: myLatLng,
                                     map: map,
                                     title: location[0]
                                 });
+
                             }
                         });
                         fullhead = "<tr>" + head + "</tr>";
@@ -174,4 +186,4 @@ $(document).ready(function () {
     });
 });
 
-                
+

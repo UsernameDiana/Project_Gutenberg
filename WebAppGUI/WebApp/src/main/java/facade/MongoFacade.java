@@ -6,7 +6,7 @@
 package facade;
 
 import Interfaces.IBook;
-import databaseAccess.PostGresControlFacade;
+import databaseAccess.MongoControlFacade;
 import entity.City;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +16,10 @@ import java.util.Map;
  * @author przyg
  */
 public class MongoFacade {
-    PostGresControlFacade mgf;
+    MongoControlFacade mgf;
 
     public MongoFacade() {
-        mgf = PostGresControlFacade.getInstance();
+        mgf = MongoControlFacade.getInstance();
     }
     public List<City> getCityByBookTitle(String book) {
         return mgf.getCityByBookTitle(book);
@@ -35,7 +35,7 @@ public class MongoFacade {
         return mgf.getBooksByAuthor(author);
     }
 
-     public Map<Long, IBook> getCitiesByBookInVicinity(float lat, float lng, int radius){
-        return mgf.getBooksInVincinity(lat, lng, radius);
+     public Map<Long, IBook> getBooksInVicinity(float lat, float lng, int radius){
+        return mgf.getBooksInVicinity(lat, lng, radius);
     }
 }

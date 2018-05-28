@@ -45,8 +45,8 @@ public class MysqlFacade {
         return dbfacade.getBooksByAuthor(author);
     }
 
-     public Map<Long, IBook> getCitiesByBookInVicinity(float lat, float lng, int radius){
-        return dbfacade.getBooksInVincinity(lat, lng, radius);
+     public Map<Long, IBook> getBooksInVicinity(float lat, float lng, int radius){
+        return dbfacade.getBooksInVicinity(lat, lng, radius);
     }
 }
 

@@ -87,7 +87,7 @@ public class MongoDBMapper {
         return listBooks;
     }
 
-    public List<City> getCitiesByBookTitle(String bookTitle) {
+    public List<City> getCityByBookTitle(String bookTitle) {
 
         System.out.println("Connecting with Mongo");
         mongoCon = new MongoDBConnector();
@@ -133,7 +133,7 @@ public class MongoDBMapper {
 
     }
 
-    public Map<Long, IBook> getBooksByAuthorName(String authorName) {
+    public Map<Long, IBook> getBooksByAuthor(String authorName) {
         System.out.println("Connecting with Mongo");
         mongoCon = new MongoDBConnector();
         MongoDatabase db = mongoCon.getDatabase();
@@ -166,7 +166,6 @@ public class MongoDBMapper {
         Set<String> cityName = new HashSet<>();
         List<City> list = new ArrayList<>();
         for (Document dbObject : books) {
-            System.out.println(dbObject);
             String author = dbObject.get("name").toString();
             Long bookId = Long.parseLong(dbObject.get("bookid").toString());
             String title = ((Document) ((List) dbObject.get("Title")).get(0)).get("title").toString();
@@ -192,14 +191,19 @@ public class MongoDBMapper {
         return listBooks;
     }
 
-    public Map<Long, IBook> getCitiesByBookInVicinity(double lan, double lon) {
-
-//        System.out.println("Connecting with Mongo");
-//        mongoCon = new MongoDBConnector();
-//        MongoDatabase db = mongoCon.getDatabase();
-//        Map<Long, IBook> listBooks = new HashMap<>();
-//        MongoCollection<Document> authorCol = db.getCollection(authorsCol);
-//
+    public Map<Long, IBook> getBooksInVicinity(float lan, float lon, int radius) {
+//db.runCommand( { geoNear: "places",
+//                 near: [ -74, 40.74 ],
+//                 spherical: true
+//               }  )
+//        db.places.find( { loc: { $geoWithin: { $centerSphere: [ [ -74, 40.74 ] ,
+//                                                     100 / 3963.2 ] } } } )
+        System.out.println("Connecting with Mongo");
+        mongoCon = new MongoDBConnector();
+        MongoDatabase db = mongoCon.getDatabase();
+        Map<Long, IBook> listBooks = new HashMap<>();
+        MongoCollection<Document> authorCol = db.getCollection(citiesCol);
+        AggregateIterable<Document> books = authorCol.aggregate(Arrays.asList());
 //        AggregateIterable<Document> books = authorCol.aggregate(Arrays.asList(
 //                new Document("$match", new Document("name", authorName)),
 //                new Document("$sort", new Document("bookid", 1)),
@@ -228,5 +232,4 @@ public class MongoDBMapper {
 //        
         return null;
     }
-
 }

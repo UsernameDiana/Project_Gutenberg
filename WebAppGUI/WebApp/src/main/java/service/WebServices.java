@@ -79,7 +79,7 @@ public class WebServices {
                 break;
 
         }
-
+        System.out.println(books);
         return gson.toJson(books);
     }
 
@@ -111,6 +111,7 @@ public class WebServices {
                 break;
 
         }
+        System.out.println(gson.toJson(books));
         return gson.toJson(books);
     }
 
@@ -126,16 +127,17 @@ public class WebServices {
         String db = obj.get("database").toString();
         switch (db) {
             case "1b":
-                cities = mf.getCityByBookTitle(db);
+                cities = mf.getCityByBookTitle(item);
                 break;
             case "2b":
-                cities = pf.getCityByBookTitle(db);
+                cities = pf.getCityByBookTitle(item);
                 break;
             case "3b":
-                cities = mgf.getCityByBookTitle(db);
+                cities = mgf.getCityByBookTitle(item);
                 break;
 
         }
+        System.out.println(gson.toJson(cities));
         return gson.toJson(cities);
     }
 
@@ -156,16 +158,17 @@ public class WebServices {
         int radius = Integer.parseInt(obj.get("radius").toString());
         switch (db) {
             case "1b":
-                books = mf.getCitiesByBookInVicinity(lat, lng, radius);
+                books = mf.getBooksInVicinity(lat, lng, radius);
                 break;
             case "2b":
-                books = pf.getCitiesByBookInVicinity(lat, lng, radius);
+                books = pf.getBooksInVicinity(lat, lng, radius);
                 break;
             case "3b":
-                books = mgf.getCitiesByBookInVicinity(lat, lng, radius);
+                books = mgf.getBooksInVicinity(lat, lng, radius);
                 break;
 
         }
+        System.out.println(gson.toJson(books));
         return gson.toJson(books);
     }
 }
