@@ -63,7 +63,23 @@ public class WebServices {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String byAuthorJSON(String content) {
-        Map<Long, IBook> books = mf.getBooksByAuthor(content);
+        Map<Long, IBook> books = null;
+        JSONObject obj = new JSONObject(content);
+        String item = obj.get("item").toString();
+        String db = obj.get("database").toString();
+        switch (db) {
+            case "1b":
+                books = mf.getBooksByAuthor(item);
+                break;
+            case "2b":
+                books = pf.getBooksByAuthor(item);
+                break;
+            case "3b":
+                books = mgf.getBooksByAuthor(item);
+                break;
+
+        }
+
         return gson.toJson(books);
     }
 
@@ -71,13 +87,30 @@ public class WebServices {
      * PUT method for updating or creating an instance of MembersService
      *
      * @param content representation for the resource
+     * @return an instance of java.lang.String
      */
     @POST
     @Path("byCity")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String byCityJSON(String content) {
-        Map<Long, IBook> books = mf.getBooksByCityName(content);
+        Map<Long, IBook> books = null;
+        System.out.println(content);
+        JSONObject obj = new JSONObject(content);
+        String item = obj.get("item").toString();
+        String db = obj.get("database").toString();
+        switch (db) {
+            case "1b":
+                books = mf.getBooksByCityName(item);
+                break;
+            case "2b":
+                books = pf.getBooksByCityName(item);
+                break;
+            case "3b":
+                books = mgf.getBooksByCityName(item);
+                break;
+
+        }
         return gson.toJson(books);
     }
 
@@ -86,7 +119,23 @@ public class WebServices {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String byBookJSON(String content) {
-        List<City> cities = mf.getCityByBookTitle(content);
+        List<City> cities = null;
+
+        JSONObject obj = new JSONObject(content);
+        String item = obj.get("item").toString();
+        String db = obj.get("database").toString();
+        switch (db) {
+            case "1b":
+                cities = mf.getCityByBookTitle(db);
+                break;
+            case "2b":
+                cities = pf.getCityByBookTitle(db);
+                break;
+            case "3b":
+                cities = mgf.getCityByBookTitle(db);
+                break;
+
+        }
         return gson.toJson(cities);
     }
 
@@ -95,6 +144,7 @@ public class WebServices {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String byGeoJSON(String content) throws ParseException {
+        Map<Long, IBook> books = null;
 
         JSONObject obj = new JSONObject(content);
         String db = obj.get("database").toString();
@@ -106,13 +156,16 @@ public class WebServices {
         int radius = Integer.parseInt(obj.get("radius").toString());
         switch (db) {
             case "1b":
-                Map<Long, IBook> books = mf.getBooksInVincinity(lat, lng, radius);
+                books = mf.getCitiesByBookInVicinity(lat, lng, radius);
+                break;
             case "2b":
-                
+                books = pf.getCitiesByBookInVicinity(lat, lng, radius);
+                break;
+            case "3b":
+                books = mgf.getCitiesByBookInVicinity(lat, lng, radius);
+                break;
 
         }
-
-        Map<Long, IBook> books = mf.getBooksInVincinity(lat, lng, radius);
         return gson.toJson(books);
     }
 }

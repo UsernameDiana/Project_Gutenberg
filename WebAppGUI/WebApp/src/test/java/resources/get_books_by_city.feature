@@ -1,16 +1,14 @@
 Feature: Get Books By City
     As a User
-    I want [feature]
-    So that I get in return a list of books
+    I want to type in a city
+    So that I get a list of books in return
 
  Scenario Outline: Enter Valid City name
-    Given The city name is '<city>'
+    Given Opening the page
     When Entering '<city>'
-    Then I should get a '<page>'
+    Then I should get results
 
 Examples:
-    | city     | page            | database |
-    | Paris    | success         | mongodb  |
-    | Paris    | success         | sql      |
-    | Paris    | success         | postgres |
+    | city     |
+    | Paris    | 
 

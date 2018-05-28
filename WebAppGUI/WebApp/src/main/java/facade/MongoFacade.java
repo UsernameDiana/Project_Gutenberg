@@ -35,7 +35,7 @@ public class MongoFacade {
         return mgf.getBooksByAuthor(author);
     }
 
-     public Map<Long, IBook> getBooksInVincinity(float lat, float lng, int radius){
+     public Map<Long, IBook> getCitiesByBookInVicinity(float lat, float lng, int radius){
         return mgf.getBooksInVincinity(lat, lng, radius);
     }
 }

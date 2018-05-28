@@ -41,15 +41,30 @@ public class Book implements IBook, Serializable {
     }
 
     public Book(Long bookid, String title, String author, City city) {
+        this.id = bookid;
         this.title = title;
         this.author.add(author);
         this.cities.add(city);
     }
-    public Book(Long bookid, String title, String author){
+
+    public Book(Long bookid, String title, String author) {
         this.id = bookid;
         this.title = title;
         this.author.add(author);
     }
+
+    public Book(Long bookid, String title, String author, List<City> city) {
+         this.id = bookid;
+        this.title = title;
+        this.author.add(author);
+        this.cities.addAll(city);
+    }
+    public Book(Long bookid, String title, List<String> author) {
+         this.id = bookid;
+        this.title = title;
+        this.author.addAll(author);
+    }
+
     public String getTitle() {
         return title;
     }
@@ -73,7 +88,7 @@ public class Book implements IBook, Serializable {
     public void addCity(City city) {
         this.cities.add(city);
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -87,5 +102,4 @@ public class Book implements IBook, Serializable {
         return "entity.Book[ id=" + id + " ]";
     }
 
-   
 }

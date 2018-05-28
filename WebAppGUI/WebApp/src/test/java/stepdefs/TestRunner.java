@@ -14,7 +14,8 @@ import org.junit.runner.RunWith;
  * @author diana
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = {"pretty"})
+@CucumberOptions(plugin = {"pretty"},
+        features = {"src//test//java//resources//"})
 public class TestRunner {
     
 }

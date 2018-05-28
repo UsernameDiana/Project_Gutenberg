@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import Interfaces.IBook;
 import Interfaces.IDataAccess;
-import com.google.common.collect.HashBiMap;
 import entity.Book;
 import entity.City;
 import java.util.HashMap;
@@ -139,20 +138,21 @@ public class SQLDBMapper implements IDataAccess {
         return list;
     }
 
-    public Map<Long, IBook> getBooksInVincinity(float lat, float lng, int radius, Connection con) {
+    @Override
+    public Map<Long, IBook> getCitiesByBookInVicinity(float lat, float lng, int radius, Connection con) {
         Map<Long, IBook> books = new HashMap<>();
         try {
             Statement stmt = con.createStatement();
             String query = "SELECT DISTINCT b.bookid, tittle, name , (\n"
                     + " 6371 * acos(\n"
-                    + " cos( radians("+lat+") )\n"
+                    + " cos( radians(" + lat + ") )\n"
                     + " * cos( radians( latitude ) )\n"
-                    + " * cos( radians( longitude ) - radians("+lng+") ) + sin( radians("+lat+") )\n"
+                    + " * cos( radians( longitude ) - radians(" + lng + ") ) + sin( radians(" + lat + ") )\n"
                     + " * sin( radians( latitude ) ) ) ) \n"
                     + "AS distance \n"
                     + "FROM Cities as c, Books as b, Authors as a\n"
                     + "WHERE b.bookid = c.bookid AND b.bookid = a.bookid\n"
-                    + "HAVING distance < "+radius+";";
+                    + "HAVING distance < " + radius + ";";
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
                 Long bookid = Long.parseLong(res.getString("bookid"));
@@ -166,5 +166,3 @@ public class SQLDBMapper implements IDataAccess {
         return books;
     }
 }
-
-

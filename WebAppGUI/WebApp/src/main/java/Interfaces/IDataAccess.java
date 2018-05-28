@@ -24,6 +24,6 @@ public interface IDataAccess {
 
     public Map<Long, IBook> getBooksByAuthor(String authorName, Connection con); //User Story # 3
     
-    public Map<Long, IBook> getBooksInVincinity(float lat, float lng, int radius, Connection con); //User Story # 3
+    public Map<Long, IBook> getCitiesByBookInVicinity(float lat, float lng, int radius, Connection con);
 
 }

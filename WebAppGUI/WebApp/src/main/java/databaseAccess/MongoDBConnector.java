@@ -2,6 +2,8 @@ package databaseAccess;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoDatabase;
 
 /**
  *
@@ -10,18 +12,19 @@ import com.mongodb.MongoClientURI;
 public class MongoDBConnector {
 
     private MongoClient mongoClient = null;
+    MongoDatabase db = null;
 
-    private String URI = "mongodb://46.101.57.37:27017";
-
-    public MongoClient getConnection() {
+    public MongoDatabase getDatabase() {
         try {
-            this.mongoClient = new MongoClient(new MongoClientURI(URI));
+
+            mongoClient = new MongoClient(new ServerAddress("46.101.57.37", 27017));
+            db = mongoClient.getDatabase("gutenberg");
 
         } catch (Exception e) {
             System.out.println("ERROR IN MONGODB CONNECTION" + e.toString());
         }
 
-        return this.mongoClient;
+        return db;
     }
 
     public void close() {

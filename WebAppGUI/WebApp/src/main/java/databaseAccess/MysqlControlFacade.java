@@ -44,7 +44,7 @@ public class MysqlControlFacade {
     }
     
     public Map<Long, IBook> getBooksInVincinity(float lat, float lng, int radius){
-        return dbsql.getBooksInVincinity(lat, lng, radius, con);
+        return dbsql.getCitiesByBookInVicinity(lat, lng, radius, con);
     }
 
 }
