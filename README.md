@@ -27,18 +27,29 @@ and has high performance.
 
 ## Data modeled in the databases.
 
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.24.12.png)
+
 ER Diagram for SQL and Postgres database
+
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.24.51.png)
 
 ER Diagram for Mongo database
 
 ## Data modeled in application
 
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.27.23.png)
+
 ## Data called to show it
+
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.28.17.png)
 
 This image shows the creation of the first sql query “getBooksByCityName”.
 Where we are extracting the data from the table into something that we’re able
 to display. So for this one we’re getting tittle (title), name, city, latitude
 and longitude. The name(author) is connected to the book, and latitude and
 longitude is connected to the city.
+
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2010.56.24.png)
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2010.56.47.png)
 
 To see if the query works for Postgres, we checked them in using terminal.
