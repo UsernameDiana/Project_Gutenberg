@@ -124,16 +124,16 @@ some time figuring out, both with what to use and how to use it. For example,
 in SQL we could easily combine tables, where in mongo it was a little harder
 (only just implemented recently) where you could use “$Lookup” and then merge tables.
 
-![]()
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.47.13.png)
 
 This however only includes one other tables, so we would have to this for each
 table and then in the end we would have to project the fields with “$project” as such:
 
-![]()
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.48.28.png)
 
 Where in SQL we could do it like:
 
-![]()
+![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2011.49.14.png)
 
 And then getting exactly what we wanted from just one query, it may be longer,
 but it’s very easy to understand what’s going on, so more readable.
