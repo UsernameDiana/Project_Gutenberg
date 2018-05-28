@@ -20,7 +20,7 @@ as we went a long and it ended up taking quite a bit longer than expected.
 
 ### Postgres
 Third choice is Postgres object-relational database system as it is readable
-and has high performance. As we have mentioned before, we were already familiar with SQL syntax, so the queries were not the new information here. Setting it up and fiddling with the server took a bit more effort.
+and has high performance. As we have mentioned before, we were already familiar with SQL syntax, so the queries were not the new information here. Setting it up and fiddling with the server took a bit more effort, mainly giving access to outer connections.
 
 
 ## Data modeled in the databases.
