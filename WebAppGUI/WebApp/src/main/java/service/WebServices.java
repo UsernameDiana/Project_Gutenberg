@@ -111,7 +111,7 @@ public class WebServices {
                 break;
 
         }
-        System.out.println(gson.toJson(books));
+        System.out.println(books);
         return gson.toJson(books);
     }
 
@@ -137,7 +137,7 @@ public class WebServices {
                 break;
 
         }
-        System.out.println(gson.toJson(cities));
+        System.out.println(cities);
         return gson.toJson(cities);
     }
 
@@ -168,7 +168,7 @@ public class WebServices {
                 break;
 
         }
-        System.out.println(gson.toJson(books));
+        System.out.println(books);
         return gson.toJson(books);
     }
 }

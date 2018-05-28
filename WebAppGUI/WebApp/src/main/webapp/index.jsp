@@ -43,7 +43,7 @@
                     <select class="w3-select" id="databases">
                         <option value="" disabled selected>Database:</option>
                         <option value="1b">MYSQL</option>
-                        <option value="2b">POSGRES</option>
+                        <option value="2b">POSTGRES</option>
                         <option value="3b">MONGO</option>
                     </select>
                     <select class="w3-select" id="option">

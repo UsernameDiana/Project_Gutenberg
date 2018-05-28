@@ -8,11 +8,16 @@ package databaseAccess;
 import Interfaces.IBook;
 import Interfaces.ICity;
 import com.mongodb.BasicDBObject;
+import com.mongodb.CommandResult;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.in;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import entity.Book;
 import entity.City;
 import java.sql.Array;
@@ -24,6 +29,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.bson.Document;
+import org.bson.codecs.Codec;
+import org.bson.codecs.FloatCodec;
+import org.bson.codecs.LongCodec;
+import org.bson.codecs.configuration.CodecRegistries;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -84,6 +96,7 @@ public class MongoDBMapper {
 //        MongoCursor<Document> booksDoc = bookCol.find().iterator();
         }
         //List<IBook> list = new ArrayList();
+        System.out.println(listBooks);
         return listBooks;
     }
 
@@ -107,28 +120,23 @@ public class MongoDBMapper {
                 new Document("$project", new Document("bookid", 1)
                         .append("_id", 1)
                         .append("C.city", 1)
-                        .append("C.latitude", 1)
-                        .append("C.longitude", 1)
+                        .append("C.location", 1)
                         .append("title", 1)
                 )
         ));
 
         for (Document dbObject : cities) {
             System.out.println(dbObject);
-////            System.out.println("Object" + dbObject);
-////            Long bookId = Long.parseLong(dbObject.get("bookid").toString());´
             List cList = (List) dbObject.get("C");
             for (Object city : cList) {
                 String name = ((Document) city).get("city").toString();
-                double lat = Double.parseDouble(((Document) city).get("latitude").toString());
-                double lon = Double.parseDouble(((Document) city).get("longitude").toString());
-                cityList.add(new City(name, lon, lat));
+                Object cord = ((Document) city).get("location");
+                List coordinates = (List) ((Document) cord).get("coordinates");
+                cityList.add(new City(name, Float.parseFloat(coordinates.get(0).toString()), Float.parseFloat(coordinates.get(1).toString())));
+
             }
 
-////            System.out.println(bookId + " " + title + " " + authorsList);
-////        MongoCursor<Document> booksDoc = bookCol.find().iterator();
         }
-//        List<IBook> list = new ArrayList();
         return cityList;
 
     }
@@ -159,8 +167,7 @@ public class MongoDBMapper {
                         .append("name", 1)
                         .append("Title.title", 1)
                         .append("City.city", 1)
-                        .append("City.latitude", 1)
-                        .append("City.longitude", 1)
+                        .append("City.location", 1)
                 )));
 
         Set<String> cityName = new HashSet<>();
@@ -171,23 +178,19 @@ public class MongoDBMapper {
             String title = ((Document) ((List) dbObject.get("Title")).get(0)).get("title").toString();
             List cities = (List) dbObject.get("City");
             for (Object city : cities) {
-//                System.out.println(city);
+                System.out.println(city);
                 String name = ((Document) city).get("city").toString();
-                double lat = Double.parseDouble(((Document) city).get("latitude").toString());
-                double lon = Double.parseDouble(((Document) city).get("longitude").toString());
+                Object cord = ((Document) city).get("location");
+                List coordinates = (List) ((Document) cord).get("coordinates");
                 if (!cityName.contains(name)) {
-                    list.add(new City(name, lon, lat));
+                    list.add(new City(name, Float.parseFloat(coordinates.get(0).toString()), Float.parseFloat(coordinates.get(1).toString())));
                     cityName.add(name);
                 }
-
             }
-            //System.out.println(bookId + " " + title + " " + author + " " + list);
             listBooks.put(bookId, new Book(bookId, title, author, list));
 
         }
-//        MongoCursor<Document> booksDoc = bookCol.find().iterator();
 
-        //List<IBook> list = new ArrayList();
         return listBooks;
     }
 
@@ -197,39 +200,45 @@ public class MongoDBMapper {
 //                 spherical: true
 //               }  )
 //        db.places.find( { loc: { $geoWithin: { $centerSphere: [ [ -74, 40.74 ] ,
-//                                                     100 / 3963.2 ] } } } )
+//                                                   100 / 3963.2 ] } } } )
+        Map<Long, IBook> listBooks = new HashMap<>();
         System.out.println("Connecting with Mongo");
         mongoCon = new MongoDBConnector();
+        System.out.println(lan + " " + lon);
         MongoDatabase db = mongoCon.getDatabase();
-        Map<Long, IBook> listBooks = new HashMap<>();
-        MongoCollection<Document> authorCol = db.getCollection(citiesCol);
-        AggregateIterable<Document> books = authorCol.aggregate(Arrays.asList());
-//        AggregateIterable<Document> books = authorCol.aggregate(Arrays.asList(
-//                new Document("$match", new Document("name", authorName)),
-//                new Document("$sort", new Document("bookid", 1)),
-//                new Document("$limit", 200),
-//                new Document("$lookup", new Document("from", "Books")
-//                        .append("localField", "bookid")
-//                        .append("foreignField", "bookid")
-//                        .append("as", "Title")
-//                ),
-//                new Document("$lookup", new Document("from", "Cities")
-//                        .append("localField", "bookid")
-//                        .append("foreignField", "bookid")
-//                        .append("as", "City")
-//                ),
-//                new Document("$project", new Document("bookid", 1)
-//                        .append("_id", 1)
-//                        .append("name", 1)
-//                        .append("Title.title", 1)
-//                        .append("City.city", 1)
-//                        .append("City.latitude", 1)
-//                        .append("City.longitude", 1)
-//                )));
-//        
-//        
-//        
-//        
-        return null;
+        
+        MongoCollection<Document> city = db.getCollection(citiesCol);
+        MongoCollection<Document> book = db.getCollection(booksCol);
+
+        
+        double[] location = new double[]{lon, lan};
+        BasicDBObject myCmd = new BasicDBObject();
+        myCmd.append("geoNear", "Cities");
+        myCmd.append("near", location);
+        myCmd.append("spherical", true);
+        myCmd.append("maxDistance", radius*1000);
+        Document myResults = db.runCommand(myCmd);
+        
+        
+        
+         List<Document> result = (ArrayList)myResults.get("results");
+        
+        List<Integer> bookIds = new ArrayList<>();
+        for (Document doc : result) {
+            Document obj = (Document) doc.get("obj");
+            bookIds.add(obj.getInteger("bookid"));
+               
+        }
+            MongoCursor<Document> book_objs = book.find(in("bookid", bookIds.toArray(new Integer[0]))).iterator();
+            
+            while (book_objs.hasNext())
+            {
+                Document doc = book_objs.next();
+                Integer id = doc.getInteger("bookid");
+                Long bookid = id.longValue();
+                listBooks.put(bookid, new Book(bookid, doc.getString("title")));
+
+            }
+        return listBooks;
     }
 }

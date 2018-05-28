@@ -13,7 +13,7 @@ $(function () {
             $("#searchItem").attr('placeholder', 'Press \'Search\' To Find Books Close to you');
         } else if ($(this).val() === "5") {
 
-            $("#searchItem").attr('placeholder', 'Enter \'Geolocation\' to find books in the vincinity. Seperate latitude and longitude with \',\'. Ex. lat,lon');
+            $("#searchItem").attr('placeholder', 'LATITUDE,LONGITUDE,RADIUS (1 = 1KM)');
         }
     });
 });

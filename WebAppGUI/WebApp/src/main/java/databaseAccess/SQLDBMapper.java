@@ -29,7 +29,7 @@ public class SQLDBMapper implements IDataAccess {
 
     @Override
     public Map<Long, IBook> getBooksByCityName(String cityName, Connection con) {
-        System.out.println(cityName);
+//        System.out.println(cityName);
         Map<Long, IBook> list = new HashMap();
         Set<Long> bookIds = new HashSet<>();
         Set<String> cities = new HashSet<>();
@@ -75,7 +75,7 @@ public class SQLDBMapper implements IDataAccess {
 
     @Override
     public List<City> getCityByBookTitle(String bookTitle, Connection con) {
-        System.out.println("Start: " + bookTitle);
+//        System.out.println("Start: " + bookTitle);
         List<City> list = new ArrayList();
 
         try {
@@ -86,7 +86,7 @@ public class SQLDBMapper implements IDataAccess {
                 String city = res.getString("city");
                 String lat = res.getString("latitude");
                 String lon = res.getString("longitude");
-                System.out.println(city + " " + lat + " " + lon);
+//                System.out.println(city + " " + lat + " " + lon);
                 list.add(new City(city, Double.parseDouble(lon), Double.parseDouble(lat)));
             }
         } catch (Exception e) {
@@ -154,7 +154,7 @@ public class SQLDBMapper implements IDataAccess {
                     + "AS distance \n"
                     + "FROM Cities as c, Books as b, Authors as a\n"
                     + "WHERE b.bookid = c.bookid AND b.bookid = a.bookid\n"
-                    + "HAVING distance < " + radius + ";";
+                    + "HAVING distance < " + radius*10 + ";";
             ResultSet res = stmt.executeQuery(query);
             while (res.next()) {
                 Long bookid = Long.parseLong(res.getString("bookid"));

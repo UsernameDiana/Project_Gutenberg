@@ -27,12 +27,17 @@ public class Book implements IBook, Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     String title;
     List<String> author = new ArrayList<>();
     List<City> cities = new ArrayList<>();
 
     public Book() {
+    }
+
+    public Book(Long bookid, String title) {
+        this.title = title;
+        this.id = bookid;
     }
 
     public Book(String title, String author) {
@@ -54,13 +59,14 @@ public class Book implements IBook, Serializable {
     }
 
     public Book(Long bookid, String title, String author, List<City> city) {
-         this.id = bookid;
+        this.id = bookid;
         this.title = title;
         this.author.add(author);
         this.cities.addAll(city);
     }
+
     public Book(Long bookid, String title, List<String> author) {
-         this.id = bookid;
+        this.id = bookid;
         this.title = title;
         this.author.addAll(author);
     }
