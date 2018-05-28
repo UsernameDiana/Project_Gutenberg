@@ -23,5 +23,7 @@ public interface IDataAccess {
     public List<City> getCityByBookTitle(String bookTitle, Connection con); //User Story # 2
 
     public Map<Long, IBook> getBooksByAuthor(String authorName, Connection con); //User Story # 3
+    
+    public Map<Long, IBook> getCitiesByBookInVicinity(double lat, double lon);
 
 }

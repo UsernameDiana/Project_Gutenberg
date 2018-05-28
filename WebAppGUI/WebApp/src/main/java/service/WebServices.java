@@ -9,6 +9,7 @@ import Interfaces.IBook;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import databaseAccess.MongoDBMapper;
 import entity.City;
 import facade.BookFacade;
 import java.util.List;
@@ -24,7 +25,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import org.json.JSONObject;
-
 
 /**
  * REST Web Service
@@ -47,6 +47,8 @@ public class WebServices {
 
     /**
      * Retrieves representation of an instance of rest.MembersService
+     *
+     * @param content
      * @return an instance of java.lang.String
      */
     @POST
@@ -54,29 +56,38 @@ public class WebServices {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String byAuthorJSON(String content) {
-        Map<Long, IBook> books = bf.getBooksByAuthor(content);
+        MongoDBMapper map = new MongoDBMapper();
+        System.out.println(content);
+//        Map<Long, IBook> books = map.getBooksByAuthorName(content);
+        Map<Long, IBook> books = map.getBooksByAuthorName(content);
+        System.out.println(books);
         return gson.toJson(books);
     }
 
     /**
      * PUT method for updating or creating an instance of MembersService
+     *
      * @param content representation for the resource
+     * @return an instance of java.lang.String
      */
     @POST
     @Path("byCity")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String byCityJSON(String content) {
-        Map<Long, IBook> books = bf.getBooksByCityName(content);
+        MongoDBMapper map = new MongoDBMapper();
+        Map<Long, IBook> books = map.getBooksByCityName(content);
         return gson.toJson(books);
     }
-    
+
     @POST
     @Path("byBook")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String byBookJSON(String content) {
-        List<City> cities = bf.getCityByBookTitle(content);
+        MongoDBMapper map = new MongoDBMapper();
+        List<City> cities = map.getCitiesByBookTitle(content);
+        System.out.println(gson.toJson(cities));
         return gson.toJson(cities);
     }
 }

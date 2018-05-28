@@ -7,13 +7,13 @@ $(document).ready(function () {
         } else if ($("#option").val() === "3") {
             var url = "api/search/byCity";
         }
+        console.log($('#searchItem').val());
         $.ajax({
             url: url,
             type: "POST",
             contentType: "application/json",
             data: $('#searchItem').val(),
             success: function (data) {
-
                 $('#modal2').find('thead:last').html("");
                 $('#modal2').find('tbody:last').html("");
 
