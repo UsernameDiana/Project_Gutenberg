@@ -53,3 +53,25 @@ longitude is connected to the city.
 ![](https://github.com/UsernameDiana/Project_Gutenberg/blob/master/screenshots/Screen%20Shot%202018-05-28%20at%2010.56.47.png)
 
 To see if the query works for Postgres, we checked them in using terminal.
+
+## How the data is imported
+We imported our data into the database via a csv file. We created the csv file
+by creating java application TxtToCsv with fileReader and fileWritter, one
+which would read from all the books, and then one which would write to the CSV file.
+The csv files where then located on a droplet in DigitalOcean.
+
+![]()
+
+Here we read from the books. We are doing 3 things here, getting the Titles,
+the Authors and the Cities and then we put it into lists. When we go through a
+book we first get the title and author (if they don’t exist, then we write
+“TitleNotFound-” and still add it in. When ever we go through a new book, we
+add an ID for each of Title, Author and Cities, so that later on we can find
+the exact info for a specific book.
+
+Afterwards we start searching for the cities by taking all the words starting
+with capital letter and we match it with a list of existing cities. We are
+making sure that there are no duplicates by using “Distinct” so that if a city
+appears a second time, then we ignore it. However, we only get one worded
+cities with this method. So for example a city like “New York” would be split
+into two, thereby getting “New” and “York”.
