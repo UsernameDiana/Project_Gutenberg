@@ -147,11 +147,11 @@ Bootstrap - Zygi
 JS - Zygi
 Index.jsp - Zygi
 
-Source Packages:
+* Source Packages:
 
 Interface - Everybody
 
-Database Access:
+* Database Access:
 
 MongoControlFacade - Zygi
 
@@ -171,13 +171,13 @@ SQLDBConnector - Everybody
 
 SQLDBMapper - Zygi
 
-Entity:
+* Entity:
 
 Book - Diana, Emil
 
 City - Diana, Emil
 
-Facade:
+* Facade:
 
 MongoFacade - Zygi
 
@@ -185,11 +185,7 @@ MysqlFacade - Emil and Plamen
 
 PostgresFacade - Diana and Plamen
 
-Service:
-
-WebServices - Zygi and Emil
-
-Creation of databases:
+* Creation of databases:
 
 SQL - Zygi and Emil
 
@@ -197,6 +193,6 @@ MongoDB - Diana, Emil and Zygi
 
 Postgres - Plamen and Diana
 
-Report:
+* Report:
 
 Emil, Diana and Plamen
