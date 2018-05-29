@@ -1,21 +1,6 @@
 package databaseAccess;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import Interfaces.IBook;
-
-import com.mongodb.BasicDBObject;
-
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
-import entity.Book;
 import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.bson.Document;
 
 public class Main {
 
@@ -48,26 +33,7 @@ public class Main {
 //        } finally {
 //            cursor.close();
 //        }
-        
-//        Map<Long, IBook> bblist = new HashMap();
-//        List<IBook> blist = new ArrayList();
-//        blist = sqlCon.getBooksByAuthorName("John Lord");
-//        bblist = sqlCon.getBooksByCityName("Paris");
-//        System.out.println("------------ 1st Query");
-//        for (IBook iBook : blist) {
-//            System.out.println(iBook.getTitle());
-////        }
-//        Map<Long, Book> bblist = new HashMap();
-//        bblist = postgCon.getBooksByCityName("Paris",);
-//        System.out.println("------------ 1st Query");
-//        for (Book Book : bblist) {
-//            System.out.println(Book.getTitle());
-//        }
-//
-//        System.out.println("------------ 2nd Query");
-//        for (IBook iBook : bblist) {
-//            System.out.println(iBook.getTitle());
-//        }
+
     }
 
 }

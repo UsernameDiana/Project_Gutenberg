@@ -6,21 +6,15 @@
 package databaseAccess;
 
 import Interfaces.IBook;
-import Interfaces.ICity;
 import com.mongodb.BasicDBObject;
-import com.mongodb.CommandResult;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.AggregateIterable;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.in;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import entity.Book;
 import entity.City;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,18 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.bson.Document;
-import org.bson.codecs.Codec;
-import org.bson.codecs.FloatCodec;
-import org.bson.codecs.LongCodec;
-import org.bson.codecs.configuration.CodecRegistries;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
-/**
- *
- * @author Zygi and Emil
- */
+
 public class MongoDBMapper {
 
     private MongoDBConnector mongoCon;
@@ -92,10 +76,7 @@ public class MongoDBMapper {
                 authorsList.add(name);
             }
             listBooks.put(bookId, new Book(bookId, title, authorsList));
-//            System.out.println(bookId + " " + title + " " + authorsList);
-//        MongoCursor<Document> booksDoc = bookCol.find().iterator();
         }
-        //List<IBook> list = new ArrayList();
         System.out.println(listBooks);
         return listBooks;
     }
@@ -195,12 +176,7 @@ public class MongoDBMapper {
     }
 
     public Map<Long, IBook> getBooksInVicinity(float lan, float lon, int radius) {
-//db.runCommand( { geoNear: "places",
-//                 near: [ -74, 40.74 ],
-//                 spherical: true
-//               }  )
-//        db.places.find( { loc: { $geoWithin: { $centerSphere: [ [ -74, 40.74 ] ,
-//                                                   100 / 3963.2 ] } } } )
+
         Map<Long, IBook> listBooks = new HashMap<>();
         System.out.println("Connecting with Mongo");
         mongoCon = new MongoDBConnector();

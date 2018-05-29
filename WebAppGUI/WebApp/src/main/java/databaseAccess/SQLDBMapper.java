@@ -1,17 +1,16 @@
 package databaseAccess;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import Interfaces.IBook;
 import Interfaces.IDataAccess;
 import entity.Book;
 import entity.City;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,7 +28,7 @@ public class SQLDBMapper implements IDataAccess {
 
     @Override
     public Map<Long, IBook> getBooksByCityName(String cityName, Connection con) {
-//        System.out.println(cityName);
+
         Map<Long, IBook> list = new HashMap();
         Set<Long> bookIds = new HashSet<>();
         Set<String> cities = new HashSet<>();
@@ -75,7 +74,7 @@ public class SQLDBMapper implements IDataAccess {
 
     @Override
     public List<City> getCityByBookTitle(String bookTitle, Connection con) {
-//        System.out.println("Start: " + bookTitle);
+
         List<City> list = new ArrayList();
 
         try {
@@ -86,7 +85,6 @@ public class SQLDBMapper implements IDataAccess {
                 String city = res.getString("city");
                 String lat = res.getString("latitude");
                 String lon = res.getString("longitude");
-//                System.out.println(city + " " + lat + " " + lon);
                 list.add(new City(city, Double.parseDouble(lon), Double.parseDouble(lat)));
             }
         } catch (Exception e) {

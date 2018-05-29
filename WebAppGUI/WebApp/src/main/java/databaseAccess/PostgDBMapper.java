@@ -5,7 +5,6 @@
  */
 package databaseAccess;
 import Interfaces.IBook;
-import Interfaces.IDataAccess;
 import entity.Book;
 import entity.City;
 import java.sql.Connection;
@@ -17,10 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-/**
- *
- * @author Plamen
- */
+
 public class PostgDBMapper {
     
     private PostgDBConnector postgCon;
